@@ -3,10 +3,20 @@ session_start();
 
 class classFonksiyon {
 
+    private $servername = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "Support";
+
+
     public function dbConnection(){
-        echo 1;
-        echo 1;
-        echo 1;
+        try {
+            $conn = new PDO("mysql:host=$this->servername;dbname=myDB", $this->username, $this->password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully";
+          } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+          }
     }
 
 }

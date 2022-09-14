@@ -17,17 +17,21 @@ require_once("class.function.php");
 </head>
 
 <body>
-    <div class="container-area mt-5">
-        <div class="container">
-            <div class="split row">
-                <div class="rainy col-12 col-lg-4 text-center mt-2">
-                    <span class="fs-3">Destek Taleplerim</span>
-                </div>
-                <div class="specly col-12 col-lg-4 text-center mt-2">
-                    <span class="fs-3">Destek Talebi Aç</span>
-                </div>
-            </div>
-        </div>
+    <div class="container mt-5">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <p>Ahmet Mücahit Doğru</p>
+                <span>Merhaba </span>
+            </li>
+            <li class="list-group-item text-end">
+                <p>Ahmet Mücahit Doğru</p>
+                <span>Merhaba </span>
+            </li>
+            <li class="list-group-item">
+                <p>Ahmet Mücahit Doğru</p>
+                <span>Merhaba </span>
+            </li>
+        </ul>
     </div>
 </body>
 
