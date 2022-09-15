@@ -4,43 +4,22 @@
 }
 
 body {
-  background-color: rgba(43, 1, 1, 0.671);
+  background-color: rgba(250, 250, 250, 0.671);
 }
 
-.split {
-  padding: 10px;
-  height: 80vh;
-  text-align: center;
-  justify-content: center;
+.navcontainer {
+  background-color: rgb(46, 46, 46);
+}
+.navcontainer .simplenavbar {
+  padding: 15px;
   align-items: center;
-  font-size: large;
-  font-weight: 600;
 }
-.split .specly {
-  background: linear-gradient(to top, rgb(255, 254, 187), rgb(255, 236, 70));
-  padding: 50px;
-  border-radius: 12px;
-  transition: 0.5s;
+.navcontainer .simplenavbar .navelement {
+  color: #fff;
+  margin-left: 30px;
+  text-decoration: none;
+  transition: 0.2s;
 }
-.split .specly:hover {
-  transform: scale(1.2);
-  background: rgb(255, 236, 70);
-}
-.split .rainy {
-  background: linear-gradient(to top, rgb(189, 255, 187), rgb(70, 255, 86));
-  padding: 50px;
-  border-radius: 12px;
-  transition: 0.5s;
-}
-.split .rainy:hover {
-  transform: scale(1.2);
-  background: rgb(70, 255, 86);
-}
-
-.gap-15 {
-  gap: 15px;
-}
-
-.list-group-item {
-  padding: 20px;
+.navcontainer .simplenavbar .navelement:hover {
+  color: rgba(236, 156, 8, 0.904);
 }/*# sourceMappingURL=style.css.map */

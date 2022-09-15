@@ -11,7 +11,7 @@ class classFonksiyon {
 
     public function dbConnection(){
         try {
-            $conn = new PDO("mysql:host=$this->servername;dbname=myDB", $this->username, $this->password);
+            $conn = new PDO("mysql:host=$this->servername;dbname=$this->database", $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "Connected successfully";
           } catch(PDOException $e) {

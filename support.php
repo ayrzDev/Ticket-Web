@@ -18,20 +18,7 @@ require_once("class.function.php");
 
 <body>
     <div class="container mt-5">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <p>Ahmet Mücahit Doğru</p>
-                <span>Merhaba </span>
-            </li>
-            <li class="list-group-item text-end">
-                <p>Ahmet Mücahit Doğru</p>
-                <span>Merhaba </span>
-            </li>
-            <li class="list-group-item">
-                <p>Ahmet Mücahit Doğru</p>
-                <span>Merhaba </span>
-            </li>
-        </ul>
+        
     </div>
 </body>
 

@@ -27,35 +27,12 @@ require_once("class.function.php");
                 src="https://media-exp1.licdn.com/dms/image/C4E0BAQH-7IWMa2U8yg/company-logo_200_200/0/1636639926141?e=2147483647&v=beta&t=bHVWBfjr9hmEOvHFKZK0AcImZCsddan92MB_l0CYZJc"
                 alt="" width="100px">
             <a href="" class="navelement">Ana Sayfa</a>
-            <a href="mysupport.php" class="navelement">Destek Taleplerim</a>
+            <a href="mysupport.php" class="navelement selected">Destek Taleplerim</a>
             <a href="" class="navelement btn-orange">Yeni Destek Talebi Aç</a>
         </div>
     </div>
     <div class="container mt-5 mb-5">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <h1 class="text-center fw-bold mb-3">Resimlerimiz</h1>
-            <div class="carousel-inner rounded">
-                <div class="carousel-item active">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        
     </div>
 </body>
 <script src="apps/js/script.js"></script>
