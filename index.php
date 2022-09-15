@@ -1,5 +1,5 @@
 <?php
-require_once("class.function.php");
+include("class.function.php");
 ?>
 <html lang="tr">
 
