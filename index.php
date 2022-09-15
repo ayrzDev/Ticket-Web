@@ -21,34 +21,21 @@ include("class.function.php");
 </head>
 
 <body>
+<div class="svg-container">
+    <svg viewbox="0 0 800 400" class="svg">
+      <path id="curve" fill="#50c6d8c2" d="M 800 300 Q 400 350 0 300 L 0 0 L 800 0 L 800 300 Z">
+      </path>
+    </svg>
+  </div>
     <div class="navcontainer">
-       <?php include("apps/includes/navbar.php"); ?>
+        <?php include("apps/includes/navbar.php"); ?>
     </div>
     <div class="container mt-5 mb-5">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <h1 class="text-center fw-bold mb-3">Resimlerimiz</h1>
-            <div class="carousel-inner rounded">
-                <div class="carousel-item active">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images8.alphacoders.com/118/1186452.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+
+        <header>
+            <h1>Destek Sistemimiz İle</h1>
+            <h3>Sorunlarınıza Anlık Çözüm.</h3>
+        </header>
     </div>
 </body>
 <script src="apps/js/script.js"></script>

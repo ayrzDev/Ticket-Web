@@ -20,14 +20,14 @@ class classFonksiyon {
     }
 
     public function dbConnection(){
-         try {
-            $conn = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8", $this->username, $this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $message = "Connected successfully";
-          } catch(PDOException $e) {
-            $message = "Connection failed: " . $e->getMessage();
-          }
-          echo "<script> console.log('{$message}')</script>";
+        try {
+          $conn = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8", $this->username, $this->password);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $message = "Connected successfully";
+        } catch(PDOException $e) {
+          $message = "Connection failed: " . $e->getMessage();
+        }
+        echo "<script> console.log('{$message}')</script>";
     }
 }
 
