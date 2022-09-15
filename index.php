@@ -36,6 +36,8 @@ include("class.function.php");
     <div class='wave'></div>
     <div class='wave wave2'></div>
     <div class='wave wave3'></div>
+  </div>
+
 </body>
 <script src="apps/js/script.js"></script>
 

@@ -28,6 +28,7 @@ class classFonksiyon {
           $message = "Connection failed: " . $e->getMessage();
         }
         echo "<script> console.log('{$message}')</script>";
+        return $conn;
     }
 }
 
