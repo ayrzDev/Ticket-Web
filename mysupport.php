@@ -24,6 +24,14 @@ require_once("class.function.php");
     <div class="navcontainer">
         <?php include("apps/includes/navbar.php"); ?>
     </div>
+    <div class="defaultheader">
+        <div class="title">
+            <h1>Destek Taleplerim</h1>
+        </div>
+        <div class="description">
+            <p>Burdan taleplerinize bakabilirsiniz..</p>
+        </div>
+    </div>
     <div class="container mt-5 mb-5">
         <nav aria-label="...">
 

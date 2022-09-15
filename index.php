@@ -21,19 +21,21 @@ include("class.function.php");
 </head>
 
 <body>
-  
+
   <div class="navcontainer">
-    <?php include("apps/includes/navbar.php"); ?>
+    <?php
+      include("apps/includes/navbar.php");
+    ?>
   </div>
-   <div class='code'>
-  <header class='content'>
-    <h1 class='title'>Gappze Destek Sistemi</h1>
-    <div class='text'>En güncel sistemlerle yapılan destek sistemimiz ile anında yanıt alın.</div>
-  </header>
- 
-  <div class='wave'></div>
-  <div class='wave wave2'></div>
-  <div class='wave wave3'></div>
+  <div class='code'>
+    <header class='content'>
+      <h1 class='title'>Gappze Destek Sistemi</h1>
+      <div class='text'>En güncel sistemlerle yapılan destek sistemimiz ile anında yanıt alın.</div>
+    </header>
+
+    <div class='wave'></div>
+    <div class='wave wave2'></div>
+    <div class='wave wave3'></div>
 </body>
 <script src="apps/js/script.js"></script>
 
