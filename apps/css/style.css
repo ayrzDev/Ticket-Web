@@ -251,4 +251,11 @@ body {
 }
 .navcontainer {
   background-color: #1d3040;
+}
+
+.navbar-text a {
+  color: #298757;
+}
+.navbar-text a:hover {
+  color: #fff;
 }/*# sourceMappingURL=style.css.map */

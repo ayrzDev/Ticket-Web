@@ -21,7 +21,7 @@
                     
                 </ul>
                 <span class="navbar-text">
-                    <button class="btn btn-outline-success" type="submit">Destek Talebi Oluştur</button>
+                    <a href="./addsupport.php" class="btn btn-outline-success" type="submit">Destek Talebi Oluştur</a>
                     <button class="btn btn-outline-success" type="submit">Giriş Yap</button>
                 </span>
             </div>

@@ -236,6 +236,16 @@ body {
   }
 }
 
-.navcontainer{
+.navcontainer {
   background-color: #1d3040;
+}
+
+.navbar-text {
+  a {
+    color: #298757;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 }
