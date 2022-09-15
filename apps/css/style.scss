@@ -16,23 +16,30 @@
   .simplenavbar {
     padding: 15px;
     align-items: center;
-    @media (max-width: 750px) {
-        display: none;
-    }
+   
     .mobilenavbar{
+      margin-left: 30px;
+      display: flex;
+      justify-content: end;
+      flex-direction: column;
+      @media (min-width: 750px) {
+        
+        display: none;
+      }
       .line{
         background: #fff;
         width:20px; 
         border-radius: 15px;
         height:1px;
-        @media (min-width: 750px) {
-          display: none;
-        }
+        
       }
     
     }
     
     .navelement {
+      @media (max-width: 750px) {
+        display: none;
+      }
       color: rgb(226, 226, 226);
       margin-left: 30px;
       text-decoration: none;
@@ -70,8 +77,6 @@ body {
   width: 100%
 }
 
-
-
 .code,
 html,
 body {
@@ -91,7 +96,6 @@ body {
 
 }
 
-
 @keyframes wave {
   from {
     transform: rotate(0deg)
@@ -102,14 +106,11 @@ body {
   }
 }
 
-
 .content {
   color: #fff;
   font-weight: 300;
   padding: 0 2rem
 }
-
-
 
 .content,
 .footer {
@@ -117,7 +118,6 @@ body {
   position: relative;
   z-index: 100;
 }
-
 
 .code,
 .content,
@@ -127,14 +127,11 @@ body {
   justify-content: center
 }
 
-
-
 .code,
 .content {
   flex-direction: column;
   bottom: 80px;
 }
-
 
 .footer {
   flex-wrap: wrap;
@@ -143,14 +140,10 @@ body {
   animation: charge .5s .5s forwards
 }
 
-
-
-
 .subtitle,
 .title {
   margin: 0
 }
-
 
 .footer a {
   text-decoration: none;
@@ -166,16 +159,11 @@ body {
   transition: all .3s
 }
 
-
-
-
 .footer a:hover {
   background-color: #fff;
   color: #222;
   border-color: #fff;
 }
-
-
 
 .subtitle,
 .text,
@@ -183,17 +171,12 @@ body {
   backface-visibility: hidden;
 }
 
-
-
 .title {
   font-size: 4.4rem;
   font-weight: 400;
   opacity: 0;
   animation: charge .5s forwards
 }
-
-
-
 
 .text {
   max-width: 50rem;
@@ -204,8 +187,6 @@ body {
   opacity: 0;
   animation: charge .5s .3s forwards
 }
-
-
 
 .wave {
   opacity: .6;
@@ -222,13 +203,10 @@ body {
   pointer-events: none
 }
 
-
-
 .wave2 {
   animation: wave 28s infinite linear;
   opacity: .3
 }
-
 
 .wave3 {
   animation: wave 20s infinite linear;
@@ -255,9 +233,24 @@ body {
 
 }
 
-
 .ripple:active {
   background-color: #37474F;
   background-size: 100%;
   transition: background 0s;
+}
+
+.defaultheader{
+  background: linear-gradient(to left,#0e293f,#22425a);
+  height: 30vh;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1{
+    font-size: xx-large;
+    font-weight: 700;
+  }
 }

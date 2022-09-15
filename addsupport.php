@@ -24,6 +24,14 @@ require_once("class.function.php");
     <div class="navcontainer">
         <?php include("apps/includes/navbar.php"); ?>
     </div>
+    <div class="defaultheader">
+        <div class="title">
+            <h1>Destek Oluştur</h1>
+        </div>
+        <div class="description">
+            <p>Burdan bizlere destek talebi açabilirsiniz.</p>
+        </div>
+    </div>
     <div class="d-flex justify-content-center container mt-5 mb-5">
         <div class="addsupport w-50">
             <h4 class="text-center fw-bold">Yeni Bir Destek Talebi Açın</h4>
