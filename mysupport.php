@@ -22,17 +22,25 @@ require_once("class.function.php");
 
 <body>
     <div class="navcontainer">
-        <div class="d-flex simplenavbar text-center justify-content-center">
-            <img class="rounded"
-                src="https://media-exp1.licdn.com/dms/image/C4E0BAQH-7IWMa2U8yg/company-logo_200_200/0/1636639926141?e=2147483647&v=beta&t=bHVWBfjr9hmEOvHFKZK0AcImZCsddan92MB_l0CYZJc"
-                alt="" width="100px">
-            <a href="" class="navelement">Ana Sayfa</a>
-            <a href="mysupport.php" class="navelement selected">Destek Taleplerim</a>
-            <a href="" class="navelement btn-orange">Yeni Destek Talebi Aç</a>
-        </div>
+        <?php include("apps/includes/navbar.php"); ?>
     </div>
     <div class="container mt-5 mb-5">
-        
+        <nav aria-label="...">
+
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </body>
 <script src="apps/js/script.js"></script>

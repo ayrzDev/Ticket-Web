@@ -22,4 +22,9 @@ body {
 }
 .navcontainer .simplenavbar .navelement:hover {
   color: rgba(236, 156, 8, 0.904);
+}
+
+.supportcard {
+  padding: 10px;
+  margin-left: 30px;
 }/*# sourceMappingURL=style.css.map */
