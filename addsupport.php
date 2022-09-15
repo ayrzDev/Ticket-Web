@@ -52,7 +52,7 @@ require_once("class.function.php");
                 <label for="floatingSelect">Departman:</label>
             </div>
             <div class="form-floating mb-2">
-                
+
             </div>
             <div class="form-floating mb-2 text-center d-flex justify-content-center">
                 <button type="submit" class="btn btn-secondary mb-3 ">Gönder</button>

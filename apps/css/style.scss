@@ -90,42 +90,9 @@ body {
   bottom: 80px;
 }
 
-.footer {
-  flex-wrap: wrap;
-  max-width: 600px;
-  opacity: 0;
-  animation: charge .5s .5s forwards
-}
-
 .subtitle,
 .title {
   margin: 0
-}
-
-.footer a {
-  text-decoration: none;
-  width: 40%;
-  padding: 12px 18px;
-  font-size: 16px;
-  margin: 20px auto 0 auto;
-  cursor: pointer;
-  color: #fff;
-  border: 2px solid;
-  border-radius: 99em;
-  outline: none;
-  transition: all .3s
-}
-
-.footer a:hover {
-  background-color: #fff;
-  color: #222;
-  border-color: #fff;
-}
-
-.subtitle,
-.text,
-.title {
-  backface-visibility: hidden;
 }
 
 .title {
