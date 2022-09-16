@@ -33,4 +33,4 @@ class classFonksiyon {
 }
 
 $class = new classFonksiyon();
-$class->dbConnection();
+// $class->dbConnection();
