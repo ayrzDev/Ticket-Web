@@ -13,9 +13,7 @@ require_once("class.function.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="apps/css/style.css">
 </head>
@@ -33,8 +31,7 @@ require_once("class.function.php");
         </div>
     </div>
     <div class="d-flex justify-content-center container mt-5 mb-5">
-        <div class="addsupport w-50">
-            <h4 class="text-center fw-bold">Yeni Bir Destek Talebi Açın</h4>
+        <div class="addsupport">
             <form class="form-floating mb-2"">
                 <input type=" email" class="form-control" id="floatingInputValue" value="test@example.com" disabled>
                 <label for="floatingInputValue">E-Posta Adresiniz:</label>
@@ -52,6 +49,9 @@ require_once("class.function.php");
                 <label for="floatingSelect">Departman:</label>
             </div>
             <div class="form-floating mb-2">
+                <textarea name="editor1"></textarea>
+            </div>
+            <div class="form-floating mb-2">
 
             </div>
             <div class="form-floating mb-2 text-center d-flex justify-content-center">
@@ -61,5 +61,7 @@ require_once("class.function.php");
     </div>
 </body>
 <script src="apps/js/script.js"></script>
+<script src="apps/ckeditor/ckeditor.js"></script>
+<script src="apps/js/ckeditor.js"></script>
 
 </html>

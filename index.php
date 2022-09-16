@@ -20,7 +20,7 @@ include("class.function.php");
   <link rel="stylesheet" href="apps/css/style.css">
 </head>
 
-<body>
+<body class="overflox">
 
   <div class="navcontainer">
     <?php
@@ -40,5 +40,7 @@ include("class.function.php");
 
 </body>
 <script src="apps/js/script.js"></script>
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script src="apps/js/ckeditor.js"></script>
 
 </html>
