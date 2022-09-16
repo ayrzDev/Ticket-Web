@@ -23,6 +23,7 @@
 }
 
 body {
+  background-color: #eaeef1;
   padding-top: 69px;
 }
 
@@ -235,4 +236,24 @@ body {
 
 .overflox {
   overflow: hidden;
+}
+
+.icon {
+  font-size: 30px;
+  color: #fff;
+  box-shadow: none;
+}
+
+.ticket-bg {
+  background: #f5f5f5;
+  padding: 10px;
+}
+
+.mysupports {
+  overflow-x: auto;
+}
+
+.description {
+  -webkit-animation: charge 0.9s forwards;
+          animation: charge 0.9s forwards;
 }/*# sourceMappingURL=style.css.map */

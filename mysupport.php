@@ -13,10 +13,6 @@ require_once("class.function.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="apps/css/style.css">
 </head>
 
@@ -32,23 +28,29 @@ require_once("class.function.php");
             <p>Burdan taleplerinize bakabilirsiniz..</p>
         </div>
     </div>
-    <div class="container mt-5 mb-5">
-        <nav aria-label="...">
-
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+    <div class="mysupports container mt-5 mb-5">
+        <table class="table" border="0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Konu</th>
+                    <th scope="col">Oluşturan</th>
+                    <th scope="col">Tarih</th>
+                    <th scope="col">Durum</th>
+                    <th scope="col">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ticket-bg my-1">
+                    <th scope="row">1</th>
+                    <td>Deneme</td>
+                    <td>Ahmet</td>
+                    <td>16 Ocak 2022</td>
+                    <td>Yanıtlandı</td>
+                    <td>Sil Değiştir</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 <script src="apps/js/script.js"></script>
