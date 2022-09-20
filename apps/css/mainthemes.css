@@ -40,7 +40,6 @@ body {
 html,
 body {
   height: 100vh;
-  overflow: hidden;
 }
 
 @-webkit-keyframes charge {
@@ -166,6 +165,7 @@ body {
   position: relative;
   background-color: #74b9ff;
   z-index: -1;
+  overflow: hidden;
 }
 
 .ripple {
