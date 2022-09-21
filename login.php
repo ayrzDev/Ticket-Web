@@ -1,5 +1,5 @@
 <?php
-require_once("class.function.php");
+include(__DIR__."/class.function.php");
 ?>
 <html lang="tr">
 
@@ -25,31 +25,37 @@ require_once("class.function.php");
     <body class="text-center">
 
         <main class="form-signin w-100 m-auto">
+            <a href="index.php">
                 <img class="rounded my-4"
                     src="https://media-exp1.licdn.com/dms/image/C4E0BAQH-7IWMa2U8yg/company-logo_200_200/0/1636639926141?e=2147483647&v=beta&t=bHVWBfjr9hmEOvHFKZK0AcImZCsddan92MB_l0CYZJc"
                     alt="" width="70px">
-                <h1 class="h3 mb-3 fw-normal">Giriş Yapın</h1>
-                <div class="process"></div>
+            </a>
+            <h1 class="h3 mb-3 fw-normal">Giriş Yapın</h1>
+            <div class="process"></div>
 
-                <div class="form-floating my-2">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="loginEmail">
-                    <label for="floatingInput">Email address</label>
-                    <p class="emailErr"></p>
+            <div class="form-floating my-2">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                    name="loginEmail">
+                <label for="floatingInput">Email address</label>
+                <p class="emailErr my-2"></p>
 
-                </div>
-                <div class="form-floating my-2">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="loginPassword">
-                    <label for="floatingPassword">Password</label>
-                    <p class="passErr"></p>
-                </div>
+            </div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    name="loginPassword">
+                <label for="floatingPassword">Password</label>
+                <p class="passErr"></p>
+            </div>
 
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <input class="w-100 btn btn-lg btn-primary loginBtn" name="loginBtn" type="submit"></input>
-                <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+                <p class="my-3">Hala kayıt olmadıysanız Hemen <a href="register.php" class="text-decoration-none text-warning">Kayıt
+                        Ol</a></p>
+            </div>
+            <input class="w-100 btn btn-lg btn-primary loginBtn" name="loginBtn" type="submit"></input>
+            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
         </main>
     </body>
 </body>

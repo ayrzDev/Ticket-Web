@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__."/class.function.php");
 $user->isLogged();
-
 ?>
 <!DOCTYPE html>
 <html>

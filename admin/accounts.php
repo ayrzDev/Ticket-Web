@@ -1,5 +1,5 @@
 <?php
-    include("../class.function.php");
+    include(__DIR__."/class.function.php");
 ?>
 <!DOCTYPE html>
 <html>

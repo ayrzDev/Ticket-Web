@@ -25,9 +25,11 @@ require_once("class.function.php");
     <body class="text-center">
         
         <main class="form-signin w-100 m-auto">
-            <img class="rounded my-4"
+           <a href="index.php">
+           <img class="rounded my-4"
             src="https://media-exp1.licdn.com/dms/image/C4E0BAQH-7IWMa2U8yg/company-logo_200_200/0/1636639926141?e=2147483647&v=beta&t=bHVWBfjr9hmEOvHFKZK0AcImZCsddan92MB_l0CYZJc"
             alt="" width="70px">
+           </a>
             <h1 class="h3 mb-3 fw-normal">Kaydınızı Oluşturarak Maceraya Katılın!</h1>
             <div class="process"></div>
             <div class="form-floating my-2">
@@ -52,7 +54,7 @@ require_once("class.function.php");
                 <label for="floatingPassword">Password</label>
                 <p class="passErr"></p>
             </div>
-
+            <p class="my-2">Zaten bir hesabınız var ise <a class="text-decoration-none text-warning" href="login.php">Giriş Yap</a></p>
             <input class="w-100 btn btn-lg btn-primary registerButton" type="submit"
                 name="registerButton"></input>
             <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
