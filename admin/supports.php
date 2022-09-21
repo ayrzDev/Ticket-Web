@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
 $user->isLogged();
 ?>
 <!DOCTYPE html>
@@ -116,6 +116,102 @@ $user->isLogged();
                         <td>Win 95+</td>
                         <td>5</td>
                         <td>C</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Internet
+                          Explorer 5.5</td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
                       </tr>
                       <tr>
                         <td>Trident</td>

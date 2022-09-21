@@ -89,7 +89,7 @@ class Accounts{
     $db = $class->dbConnection();
     $accounts = $db->prepare("SELECT * FROM accounts");
     $accountFetch = $accounts->fetch();
-    while($accounts->rowCount() >= 1){
+    while($accounts->rowCount() <= 1){
       echo "a";
     }
   }
@@ -127,10 +127,17 @@ class Accounts{
   }
 
   public function isLogged(){
-    if((isset($_SESSION["logged"]))){
-      echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+    if(isset($_SESSION["logged"])){
+       return true;
+    }else{
+        return false;
     }
   }
+
+  public function logout(){
+    session_destroy();
+    echo '<meta http-equiv="refresh" content="0;URL=login.php">';
+}
 
 }
 
@@ -145,4 +152,7 @@ if(isset($_POST["loginBtn"])){
   $user->loginAccount();
 }
 
-$user->isLogged();
+if(!($user->isLogged())){
+    header("location: ../index.php");
+    exit;
+}

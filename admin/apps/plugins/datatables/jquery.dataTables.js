@@ -9224,7 +9224,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "Sonraki",
 			
 			
 				/**
@@ -9245,7 +9245,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "Önceki"
 			},
 		
 			/**
@@ -9287,8 +9287,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-		
+			// "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+				"sInfo": "Toplamda _TOTAL_ adet mevcut.",
 		
 			/**
 			 * Display information string for when the table is empty. Typically the 

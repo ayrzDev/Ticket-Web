@@ -1,5 +1,5 @@
 <?php
-    include(__DIR__."/class.function.php");
+    include($_SERVER['DOCUMENT_ROOT']."/class.function.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -108,7 +108,7 @@
                         <td>X</td>
                       </tr>
                       <?php
-                      $user->getAllAccounts();
+                      echo $user->getAllAccounts();
                       ?>
                     
                     </tbody>
