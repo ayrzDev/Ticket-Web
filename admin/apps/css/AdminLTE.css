@@ -4051,3 +4051,15 @@ Gradient Background colors
   opacity: 1;
   filter: alpha(opacity=100);
 }
+::-webkit-scrollbar {
+	width: 10px; /*genislik 10px olsun*/
+	background-color: #eaeaea; /*scrollbar arkaplan renk*/
+	border-left: 1px solid #f1f1f1;  /*arkaplan sol tarafa cizgi cek*/
+}
+::-webkit-scrollbar-thumb {
+	background-color: #a0a0a0; /*scrollbar renk*/
+	border-radius:15px /*oval olsun*/
+}
+::-webkit-scrollbar-thumb:hover { /*tiklandiginda*/
+	background-color: #7d7d7d;
+}

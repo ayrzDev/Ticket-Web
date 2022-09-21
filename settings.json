@@ -1,6 +1,6 @@
 {
     "host": "localhost",
-    "username": "root",
+    "user": "root",
     "password": "",
-    "database": "gappzeSupport"
+    "database": "supportGappze"
 }

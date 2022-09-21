@@ -28,6 +28,11 @@
                 <i class="fa fa-ticket"></i> <span>Destekler</span>
             </a>
         </li>
+        <li class=" treeview">
+            <a href="accounts.php">
+                <i class="fa fa-user"></i> <span>Kullanıcılar</span>
+            </a>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-gear"></i> <span>Ayarlar</span>

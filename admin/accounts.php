@@ -1,7 +1,5 @@
 <?php
-require_once(__DIR__."/class.function.php");
-$user->isLogged();
-
+    include("../class.function.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +26,7 @@ $user->isLogged();
 <body class="skin-red fixed">
     <div class="wrapper">
 
-        <header class="main-header">
+    <header class="main-header">
             <!-- Logo -->
             <a href="index.html" class="logo"><b>Gapp</b>ze</a>
             <nav class="navbar navbar-static-top" role="navigation">
@@ -69,20 +67,19 @@ $user->isLogged();
             </nav>
         </header>
         <aside class="main-sidebar">
-            <?php
+      <?php
         include "apps/includes/navbar.php";
       ?>
-        </aside>
+    </aside>
 
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Dashboard
-                    <small>Gösterge Paneli</small>
+                    Kullanıcılar
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="/index"><i class="fa fa-dashboard"></i> Ana Sayfa</a></li>
-                    <li class="active">Destekler</li>
+                    <li class="active">Kullanıcılar</li>
                 </ol>
             </section>
              <!-- Main content -->
@@ -94,11 +91,11 @@ $user->isLogged();
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>#</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Email</th>
+                        <th>Yetki</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -110,22 +107,10 @@ $user->isLogged();
                         <td> 4</td>
                         <td>X</td>
                       </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.5</td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                      </tr>
+                      <?php
+                      $user->getAllAccounts();
+                      ?>
+                    
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

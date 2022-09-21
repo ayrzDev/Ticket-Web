@@ -11,10 +11,10 @@
   function scrollEvent(scrollPos) {
     if (scrollPos >= 0 && scrollPos < defaultCurveValue) {
       curveValue = defaultCurveValue - parseFloat(scrollPos / curveRate);
-      $curve.setAttribute(
-        "d",
-        "M 800 300 Q 400 " + curveValue + " 0 300 L 0 0 L 800 0 L 800 300 Z"
-      );
+      // $curve.setAttribute(
+      //   "d",
+      //   "M 800 300 Q 400 " + curveValue + " 0 300 L 0 0 L 800 0 L 800 300 Z"
+      // );
     }
   }
 

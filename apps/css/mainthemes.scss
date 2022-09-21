@@ -214,7 +214,11 @@ body {
 .navcontainer {
   background-color: #1d3040;
 }
-
+.navbar-toggler,
+.navbar-toggler:focus{
+  box-shadow: none;
+  border: 0px;
+}
 .navbar-text {
   a {
     color: #298757;
@@ -269,4 +273,17 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+::-webkit-scrollbar {
+	width: 10px; /*genislik 10px olsun*/
+	background-color: #eaeaea; /*scrollbar arkaplan renk*/
+	border-left: 1px solid #f1f1f1;  /*arkaplan sol tarafa cizgi cek*/
+}
+::-webkit-scrollbar-thumb {
+	background-color: #a0a0a0; /*scrollbar renk*/
+	border-radius:15px /*oval olsun*/
+}
+::-webkit-scrollbar-thumb:hover { /*tiklandiginda*/
+	background-color: #7d7d7d;
 }
