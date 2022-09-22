@@ -1298,7 +1298,8 @@ a:focus {
     right: 10px;
     z-index: 0;
     font-size: 90px;
-    color: rgba(0, 0, 0, 0.15)
+    color: rgba(0, 0, 0, 0.15);
+    top: 5px;
 }
 
 .small-box:hover {
@@ -4646,4 +4647,13 @@ fieldset[disabled] .btn-vk.active {
 }
 ::-webkit-scrollbar-thumb:hover { /*tiklandiginda*/
 	background-color: #7d7d7d;
+}
+
+.img-circle{
+    transition: 0.9s;
+}
+
+.img-circle:hover{
+    border-radius: 25%;
+    transform: scale(1.1);
 }

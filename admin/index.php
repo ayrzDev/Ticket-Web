@@ -2,7 +2,7 @@
 
 include($_SERVER['DOCUMENT_ROOT']."/class.function.php");
 
-if(!($user->getLogged())){
+if(!($user->getLoggedMod())){
   header("location: ../index.php");
   exit;
 }
@@ -113,7 +113,7 @@ if(!($user->getLogged())){
           <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-yellow">
               <div class="inner">
-                <h3>44</h3>
+                <h3><?= $user->getUserCount(); ?></h3>
                 <p>Kullanıcılar</p>
               </div>
               <div class="icon">

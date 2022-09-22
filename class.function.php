@@ -125,10 +125,44 @@ class Accounts{
      }
   }
 
+  public function getUserCount(){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+  
+    $roles = $db->prepare("SELECT * FROM accounts");
+    $roles->execute();
+    return $roles->rowCount();
+  }
+
+  public function getAllRoles(){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    if($db){
+
+    $roles = $db->prepare("SELECT * FROM roles");
+    $roles->execute();
+    $roles_fetch = $roles->fetch();
+    if($roles->rowCount() != 0){
+      foreach ($roles as $roles_veri) {
+        echo "<tr>";
+        echo "<td>{$roles_veri["id"]}</td>";
+        echo "<td>{$roles_veri["name"]}</td>";
+        echo "<td><button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
+        echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+        echo "</td></tr>";
+        echo "</tr>";
+      }
+    }
+    }
+  }
+
   public function getPermissionName($id){
       $class = new classFonksiyon();
       $user = new Accounts();
       $db = $class->dbConnection();
+
       $accounts = $db->prepare("SELECT permission FROM accounts WHERE id = ?");
       $accounts->execute(array(
         $id
@@ -141,7 +175,11 @@ class Accounts{
       ));
       $roles_fetch = $roles->fetch();
       
-      return $roles_fetch["name"];
+      if($accounts->rowCount() != 0){
+        return $roles_fetch["name"];
+      }else{
+        return false;
+      }
   }
 
   public function getName(){
@@ -153,7 +191,9 @@ class Accounts{
       $_SESSION["userAccountID"]
     ));
     $accounts_fetch = $accounts->fetch();
+    if($accounts->rowCount() != 0){
     return $accounts_fetch["firstName"]." ".$accounts_fetch["lastName"];
+    }
   }
 
   public function loginAccount(){
@@ -201,19 +241,28 @@ class Accounts{
         $userid
       ));
       $usergetElementFetch = $usergetElement->fetch();
-      return $usergetElementFetch["permission"];
+      if($usergetElement->rowCount() != 0){
+        return $usergetElementFetch["permission"];
+      }
     }
   }
 
   public function getLogged(){
     if(isset($_SESSION["logged"])){
-        if($this->getPermission($_SESSION["userAccountID"]) > 0){
           return true;
-        }else{
-          
-        }
     }else{
         return false;
+    }
+  }
+  public function getLoggedMod(){
+    if($this->getLogged()){
+      if($this->getPermission($_SESSION["userAccountID"]) > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
     }
   }
 

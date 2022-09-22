@@ -34,6 +34,11 @@
                     <i class="fa fa-user"></i> <span>Kullanıcılar</span>
                 </a>
             </li>
+            <li class=" treeview">
+                <a href="roles.php">
+                    <i class="fa fa-tag"></i> <span>Roller</span>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Ayarlar</span>
