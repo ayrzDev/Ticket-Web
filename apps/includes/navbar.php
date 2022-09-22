@@ -11,13 +11,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="./index.php">Ana Sayfa</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./mysupport.php">Destek Taleplerim</a>
-                </li>
-
+                <?php
+                    $class->pagesAll(0);
+                ?>
             </ul>
             <span class="navbar-text">
                 <a href="./addsupport.php" class="btn btn-outline-success" type="submit">Destek Talebi Oluştur</a>

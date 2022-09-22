@@ -31,6 +31,23 @@ class classFonksiyon {
       return $conn;
     }
 
+    public function pagesAll($location){
+      $db = $this->dbConnection();
+      if($db){
+          $page = $db->prepare("SELECT * FROM pages WHERE location = ?");
+          $page->execute(array(
+            $location
+          ));    
+          if($page->rowCount() != 0){
+            foreach ($page as $page_veri) {
+               echo '<li class="nav-item">';
+               echo "<a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
+               echo '</li>';
+            }
+        }
+      }
+    }
+
     public function getWebKey(){
       $key = array(
         "host" => $this->host,
@@ -86,12 +103,57 @@ class Accounts{
 
   public function getAllAccounts(){
     $class = new classFonksiyon();
+    $user = new Accounts();
     $db = $class->dbConnection();
-    $accounts = $db->prepare("SELECT * FROM accounts");
-    $accountFetch = $accounts->fetch();
-    while($accounts->rowCount() <= 1){
-      echo "a";
-    }
+     if($db){
+        $accounts = $db->prepare("SELECT * FROM accounts");
+        $accounts->execute();
+        if($accounts->rowCount() != 0){
+          foreach ($accounts as $accounts_veri) {
+              $role = $this->getPermissionName($accounts_veri["id"]);
+              echo "<tr>";
+              echo "<td>{$accounts_veri["id"]}</td>";
+              echo "<td>{$accounts_veri["firstName"]}</td>";
+              echo "<td>{$accounts_veri["lastName"]}</td>";
+              echo "<td>{$accounts_veri["email"]}</td>";
+              echo "<td>{$role}</td><td>";
+              echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
+              echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+              echo "</td></tr>";
+           }
+       }
+     }
+  }
+
+  public function getPermissionName($id){
+      $class = new classFonksiyon();
+      $user = new Accounts();
+      $db = $class->dbConnection();
+      $accounts = $db->prepare("SELECT permission FROM accounts WHERE id = ?");
+      $accounts->execute(array(
+        $id
+      ));
+      $accounts_fetch = $accounts->fetch();
+
+      $roles = $db->prepare("SELECT * FROM roles WHERE id = ?");
+      $roles->execute(array(
+        $accounts_fetch["permission"]
+      ));
+      $roles_fetch = $roles->fetch();
+      
+      return $roles_fetch["name"];
+  }
+
+  public function getName(){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    $accounts = $db->prepare("SELECT firstName,lastName FROM accounts WHERE id = ?");
+    $accounts->execute(array(
+      $_SESSION["userAccountID"]
+    ));
+    $accounts_fetch = $accounts->fetch();
+    return $accounts_fetch["firstName"]." ".$accounts_fetch["lastName"];
   }
 
   public function loginAccount(){
@@ -107,36 +169,61 @@ class Accounts{
             $email,
             $password
           ));
-          if($userDb->rowCount() == 0){
-            echo '<div class="alert alert-danger" role="alert">Böyle bir hesap mevcut değil.</div>';
-          }else{
+          if($userDb->rowCount() != 0){
+            $usergetElement = $db->prepare("SELECT id FROM accounts WHERE email = ?");
+            $usergetElement->execute(array(
+              $email
+            ));
+            $usergetElementFetch = $usergetElement->fetch();
+            $_SESSION["logged"] = true;
+            $_SESSION["userAccountID"] = $usergetElementFetch["id"];
             echo '<div class="alert alert-primary" role="alert">Giriş yapıldı. 3 Saniye içerisinde yönlendirileceksiniz.</div>';
             echo '<meta http-equiv="refresh" content="3;URL=index.php">';
+          }else{
+            if($email=="" or $password==""){
+              echo '<div class="alert alert-warning" role="alert">Lütfen boş alan bırakmayınız</div>';
+            }else{
+              echo '<div class="alert alert-warning" role="alert">E-Posta veya şifreniz yanlış</div>';
+             }
+
           }
         }
       }
     }
   }
 
-  public function getLogged(){
-    if(isset($_SESSION["logged"])){
-      return false;
-    }else{
-      return true;
+  public function getPermission($userid){
+    $class = new classFonksiyon();
+    $db = $class->dbConnection();
+    if($db){
+      $usergetElement = $db->prepare("SELECT permission FROM accounts WHERE id = ?");
+      $usergetElement->execute(array(
+        $userid
+      ));
+      $usergetElementFetch = $usergetElement->fetch();
+      return $usergetElementFetch["permission"];
     }
   }
 
-  public function isLogged(){
+  public function getLogged(){
     if(isset($_SESSION["logged"])){
-       return true;
+        if($this->getPermission($_SESSION["userAccountID"]) > 0){
+          return true;
+        }else{
+          
+        }
     }else{
         return false;
     }
   }
 
   public function logout(){
-    session_destroy();
-    echo '<meta http-equiv="refresh" content="0;URL=login.php">';
+    if($this->getLogged()){
+      session_destroy();
+      echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+    }else{
+      echo '<meta http-equiv="refresh" content="0;URL=login.php">';
+    }
 }
 
 }
@@ -150,9 +237,4 @@ if(isset($_POST["registerBtn"])){
 
 if(isset($_POST["loginBtn"])){
   $user->loginAccount();
-}
-
-if(!($user->isLogged())){
-    header("location: ../index.php");
-    exit;
 }

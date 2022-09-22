@@ -9266,7 +9266,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "Hiç bir veri oluşturulmamış",
 		
 		
 			/**
@@ -9306,7 +9306,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Toplamda 0 adet mevcut.",
+
 		
 		
 			/**

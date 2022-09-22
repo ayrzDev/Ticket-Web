@@ -1,3 +1,14 @@
+<?php
+
+include($_SERVER['DOCUMENT_ROOT']."/class.function.php");
+
+if(!($user->getLogged())){
+  header("location: ../index.php");
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,49 +30,44 @@
   <link href="apps/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />,
 </head>
 
-  <body class="skin-red fixed">
+<body class="skin-red fixed">
   <div class="wrapper">
-
-  <header class="main-header">
-            <!-- Logo -->
-            <a href="index.php" class="logo"><b>Gapp</b>ze</a>
-            <nav class="navbar navbar-static-top" role="navigation">
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown messages-menu">
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="user-image"
-                                    alt="User Image" />
-                                <span class="hidden-xs">Ahmet DOĞRU</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="user-header">
-                                    <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle"
-                                        alt="User Image" />
-                                    <p>
-                                        Ahmet DOĞRU
-                                        <small>Yönetici</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profil</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Çıkış yap</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+    <header class="main-header">
+      <a href="index.php" class="logo"><b>Gapp</b>ze</a>
+      <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown messages-menu">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="user-image" alt="User Image" />
+                <span class="hidden-xs">Ahmet DOĞRU</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="user-header">
+                  <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle" alt="User Image" />
+                  <p>
+                    Ahmet DOĞRU
+                    <small>Yönetici</small>
+                  </p>
+                </li>
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profil</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="#" class="btn btn-default btn-flat">Çıkış yap</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <aside class="main-sidebar">
       <?php
         include "apps/includes/navbar.php";
@@ -192,13 +198,12 @@
     </footer>
   </div>
 
-  <script src="apps/plugins/jQuery/jQuery-2.1.3.min.js"></script>
   <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
   <script>
     $.widget.bridge('uibutton', $.ui.button);
   </script>
-  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
   <script src="apps/plugins/morris/morris.min.js" type="text/javascript"></script>
   <script src="apps/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
   <script src="apps/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
@@ -208,12 +213,28 @@
   <script src="apps/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
   <script src="apps/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
   <script src="apps/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+  <script src="apps/js/pages/dashboard.js" type="text/javascript"></script>
+  <script src="apps/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+  <script src="apps/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="apps/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+  <script src="apps/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
   <script src="apps/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
   <script src='apps/plugins/fastclick/fastclick.min.js'></script>
   <script src="apps/js/app.min.js" type="text/javascript"></script>
-
-  <script src="apps/js/pages/dashboard.js" type="text/javascript"></script>
   <script src="apps/js/demo.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#example1").dataTable();
+      $('#example2').dataTable({
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": true,
+        "bAutoWidth": false
+      });
+    });
+  </script>
 </body>
 
 </html>
