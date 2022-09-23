@@ -82,4 +82,25 @@ $(function() {
             }
         });
     });
+    $(".role-add").click(function() {
+        var name = $("input[name=role-name]").val();
+        var roleadd = $("input[name=role-add]").val();
+        $.ajax({
+            url: "../class.function.php",
+            type: "POST",
+            data: {
+                "roleName": name,
+                "roleAdd": roleadd
+            },
+            success: function(sonuc) {
+                $(".process").html(sonuc);
+                if(name == null || name == ""){
+                    $("#error").addClass("alert alert-success");
+                    $(".error").html("Lütfen boş alan bırakmayınız.");
+                }else{
+                    $("#error").removeClass("alert alert-success");
+                }
+            }
+        });
+    });
 });

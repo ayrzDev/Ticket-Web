@@ -1,12 +1,10 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
-$user->getLogged();
 
-if(!($user->getLogged())){
+if(!($user->getLoggedMod())){
   header("location: ../index.php");
   exit;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +47,12 @@ if(!($user->getLogged())){
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
+              <div class="header-box">
+              <!-- <h3>S</h3> -->
+              <div class="add-btn btn-group">
+                <a href="role-add.php"><input class="btn btn-primary" type="submit" value="Yeni rol ekle"></a>
+            </div>
+              </div>
               <div class="box-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>

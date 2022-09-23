@@ -1,8 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
-$user->getLogged();
 
-if(!($user->getLogged())){
+if(!($user->getLoggedMod())){
   header("location: ../index.php");
   exit;
 }

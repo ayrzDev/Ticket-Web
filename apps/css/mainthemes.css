@@ -29,7 +29,7 @@ body {
 
 html,
 body {
-  font-size: 12px;
+  font-size: 13px;
   font-family: "Poppins", sans-serif;
   text-align: center;
   line-height: 1.4;
@@ -215,15 +215,6 @@ body {
   color: rgba(236, 156, 8, 0.904);
 }
 
-@media (min-width: 1200px) {
-  .container,
-.container-lg,
-.container-md,
-.container-sm,
-.container-xl {
-    max-width: 721px;
-  }
-}
 .navcontainer {
   background-color: #1d3040;
 }
@@ -234,9 +225,19 @@ body {
   border: 0px;
 }
 
+.navbar-text .btn-outline-success,
 .navbar-text a {
   color: #298757;
 }
+.navbar-text .btn-outline-success:hover,
+.navbar-text a:hover {
+  color: #fff;
+}
+.navbar-text .btn-outline-danger,
+.navbar-text a {
+  color: #e6124a;
+}
+.navbar-text .btn-outline-danger:hover,
 .navbar-text a:hover {
   color: #fff;
 }

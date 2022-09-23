@@ -31,21 +31,50 @@ class classFonksiyon {
       return $conn;
     }
 
-    public function pagesAll($location){
+    public function pagesAll($location,$permission){
       $db = $this->dbConnection();
+      $user = new Accounts();
       if($db){
+        if($location == 1){
           $page = $db->prepare("SELECT * FROM pages WHERE location = ?");
           $page->execute(array(
             $location
           ));    
           if($page->rowCount() != 0){
             foreach ($page as $page_veri) {
-               echo '<li class="nav-item">';
-               echo "<a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
-               echo '</li>';
+                if($page_veri["permission"] == $permission){
+                echo "<li class='treeview'>";
+                echo "<a href='{$page_veri["src"]}'>";
+                echo "<i class='{$page_veri["icon"]}'></i> <span>{$page_veri["name"]}</span>";
+                echo "</a>";
+                echo "</li>"; 
+                }
+            }
+        }
+        }else{
+          $page = $db->prepare("SELECT * FROM pages WHERE location = ?");
+          $page->execute(array(
+            $location
+          ));    
+          if($page->rowCount() != 0){
+            foreach ($page as $page_veri) {
+              if($user->getLogged()){
+                if($page_veri["isLogged"] != 0 || $page_veri["isLogged"] == 0){  
+                  echo '<li class="nav-item">';
+                  echo "<i class='fa fa-ticket'></i><a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
+                  echo '</li>';
+                }
+              }else{
+                if($page_veri["isLogged"] == 0){  
+                  echo '<li class="nav-item">';
+                  echo "<i class='fa fa-ticket'></i><a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
+                  echo '</li>';
+                }
+              }
             }
         }
       }
+    }
     }
 
     public function getWebKey(){
@@ -56,6 +85,20 @@ class classFonksiyon {
         "database" => $this->database
       );
       return $key;
+    }
+
+    public function roleAdd(){
+      $db = $this->dbConnection();
+      $name = trim($_POST["roleName"]);
+
+      if($db){
+        $role_add = $db->prepare("INSERT INTO roles SET name = ?,slot = ?");
+        $role_add->execute(array(
+          $name,
+          $role_add->rowCount() - 1
+        ));
+        echo "Eklendi";
+      }
     }
 }
 
@@ -147,10 +190,11 @@ class Accounts{
     if($roles->rowCount() != 0){
       foreach ($roles as $roles_veri) {
         echo "<tr>";
-        echo "<td>{$roles_veri["id"]}</td>";
+        echo "<td>{$roles_veri["slot"]}</td>";
         echo "<td>{$roles_veri["name"]}</td>";
-        echo "<td><button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
-        echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+        echo "<input type='hidden' value='{$roles_veri["id"]}' >";
+        echo "<td><input class='btn btn-warning btn-specly mt-2 mr-2 role_edit' type='submit' value'Düzenle'></input>";
+        echo "<input class='btn btn-danger btn-specly mt-2 mr-2 role_delete' type='submit' value='Sil'></input>";
         echo "</td></tr>";
         echo "</tr>";
       }
@@ -169,7 +213,7 @@ class Accounts{
       ));
       $accounts_fetch = $accounts->fetch();
 
-      $roles = $db->prepare("SELECT * FROM roles WHERE id = ?");
+      $roles = $db->prepare("SELECT * FROM roles WHERE slot = ?");
       $roles->execute(array(
         $accounts_fetch["permission"]
       ));
@@ -230,7 +274,7 @@ class Accounts{
         }
       }
     }
-  }
+  }//Login End
 
   public function getPermission($userid){
     $class = new classFonksiyon();
@@ -245,7 +289,7 @@ class Accounts{
         return $usergetElementFetch["permission"];
       }
     }
-  }
+  }//getPermission End
 
   public function getLogged(){
     if(isset($_SESSION["logged"])){
@@ -253,7 +297,8 @@ class Accounts{
     }else{
         return false;
     }
-  }
+  }//getLogged End
+
   public function getLoggedMod(){
     if($this->getLogged()){
       if($this->getPermission($_SESSION["userAccountID"]) > 0){
@@ -273,9 +318,8 @@ class Accounts{
     }else{
       echo '<meta http-equiv="refresh" content="0;URL=login.php">';
     }
-}
-
-}
+  }
+}//AccountClass End
 
 $class = new classFonksiyon();
 $user = new Accounts();
@@ -286,4 +330,8 @@ if(isset($_POST["registerBtn"])){
 
 if(isset($_POST["loginBtn"])){
   $user->loginAccount();
+}
+
+if(isset($_POST["roleAdd"])){
+  $class->roleAdd();
 }

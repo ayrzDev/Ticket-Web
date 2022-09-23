@@ -24,7 +24,7 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profil</a>
+                                <a href="profile.php" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="../logout.php" class="btn btn-default btn-flat">Çıkış yap</a>

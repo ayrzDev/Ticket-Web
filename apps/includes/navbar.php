@@ -12,12 +12,25 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php
-                    $class->pagesAll(0);
+                    $class->pagesAll(0,0);
                 ?>
             </ul>
             <span class="navbar-text">
-                <a href="./addsupport.php" class="btn btn-outline-success" type="submit">Destek Talebi Oluştur</a>
+                <?php
+                if($user->getLogged()){
+                    if($user->getPermission($_SESSION["userAccountID"]) > 0){
+                ?>
+                <a href="admin/" class="btn btn-outline-danger" type="submit">Admin</a>
+                <?php
+                }
+                ?>
+                <a href="./logout.php" class="btn btn-outline-success" type="submit">Çıkış Yap</a>
+                <?php }else{
+                ?>
                 <a href="./login.php" class="btn btn-outline-success" type="submit">Giriş Yap</a>
+                <?php
+                }
+                ?>
             </span>
         </div>
     </div>

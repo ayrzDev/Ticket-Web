@@ -1,12 +1,10 @@
 <?php
-
-include($_SERVER['DOCUMENT_ROOT']."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
 
 if(!($user->getLoggedMod())){
   header("location: ../index.php");
   exit;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +15,7 @@ if(!($user->getLoggedMod())){
   <title>Gappze | Dashboard</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <link href="apps/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
-    type="text/css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <link href="apps/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
   <link href="apps/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />

@@ -30,7 +30,7 @@ body{
 }
 html,
 body {
-  font-size: 12px;
+  font-size: 13px;
   font-family: 'Poppins', sans-serif;
   text-align: center;
   line-height: 1.4;
@@ -200,16 +200,16 @@ body {
 }
 
 
-@media (min-width: 1200px) {
+// @media (min-width: 1200px) {
 
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 721px;
-  }
-}
+//   .container,
+//   .container-lg,
+//   .container-md,
+//   .container-sm,
+//   .container-xl {
+//     max-width: 850px;
+//   } 
+// }
 
 .navcontainer {
   background-color: #1d3040;
@@ -220,8 +220,18 @@ body {
   border: 0px;
 }
 .navbar-text {
+  .btn-outline-success,
   a {
     color: #298757;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+  .btn-outline-danger,
+  a {
+    color: #e6124a;
+    
 
     &:hover {
       color: #fff;
