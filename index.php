@@ -21,7 +21,7 @@ include("class.function.php");
 
 <body class="overflox">
 
-  <div class="navcontainer">
+  <div class="navcontainer"> 
     <?php
       include("apps/includes/navbar.php");
       $class->dbConnection();

@@ -1,5 +1,9 @@
 <?php
-    include(__DIR__."/class.function.php");
+include(__DIR__."/class.function.php");
+if(!($user->getLogged())){
+    header("location: ../index.php");
+    exit;
+}
 ?>
 <html lang="tr">
 

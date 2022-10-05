@@ -50,7 +50,7 @@ if(!($user->getLoggedMod())){
                             <div class="box-header with-border user-container">
                                 <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="user-image" alt="User Image" width="100px"/>
                                 <div class="user-text-area">
-                                    <h3 class="box-title"><?= $user->getName(); ?></h3>
+                                    <h3 class="box-title"><?= $user->getName($_SESSION["userAccountID"]); ?></h3>
                                     <p class=""><?= $user->getPermissionName($_SESSION["userAccountID"]); ?></p>
                                 </div>
                                 

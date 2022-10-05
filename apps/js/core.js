@@ -95,11 +95,39 @@ $(function() {
             success: function(sonuc) {
                 $(".process").html(sonuc);
                 if(name == null || name == ""){
-                    $("#error").addClass("alert alert-success");
+                    $("#error").addClass("alert alert-danger");
                     $(".error").html("Lütfen boş alan bırakmayınız.");
                 }else{
                     $("#error").removeClass("alert alert-success");
                 }
+            }
+        });
+    });
+    
+    $(".supportadd").click(function() {
+        var title = $("input[name=title]").val();
+        var departments = $("select[name=departments]").val();
+        var message = CKEDITOR.instances.editor1.getData();
+        var supportadd = $("input[name=supportadd]").val();
+        $.ajax({
+            url: "class.function.php",
+            type: "POST",
+            data: {
+                "title": title,
+                "departments": departments,
+                "message": message,
+                "supportadd": supportadd
+            },
+            success: function(sonuc) {
+                $(".process").html(sonuc);
+                // alert(message)
+                // if(message == null || message == " "){
+                //     $(".process").addClass("alert alert-danger");
+                //     $(".process").html("Lütfen boş alan bırakmayınız.");
+                // }else{
+                //     $(".process").removeClass("alert alert-success");
+                //     $(".process").html("");
+                // }
             }
         });
     });

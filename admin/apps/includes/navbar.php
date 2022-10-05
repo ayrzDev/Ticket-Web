@@ -5,8 +5,8 @@
                 <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-                <p><?= $user->getName(); ?></p>
-                <a><?= $user->getPermissionName($_SESSION["userAccountID"]); ?></a>
+                <p><?= $user->getName($_SESSION["userAccountID"]); ?></p>
+                <a><?= $user->getPermissionName($_SESSION["userAccountID"])." ".$user->getUserDepartment($_SESSION["userAccountID"]); ?></a>
             </div>
         </div>
         <form action="#" method="get" class="sidebar-form">

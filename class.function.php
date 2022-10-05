@@ -27,7 +27,7 @@ class classFonksiyon {
       } catch(PDOException $e) {
         $message = "Connection failed: " . $e->getMessage();
       }
-      echo "<script> console.log('{$message}')</script>";
+      // echo "<script> console.log('{$message}')</script>";
       return $conn;
     }
 
@@ -92,12 +92,53 @@ class classFonksiyon {
       $name = trim($_POST["roleName"]);
 
       if($db){
-        $role_add = $db->prepare("INSERT INTO roles SET name = ?,slot = ?");
+        $role_add = $db->prepare("INSERT INTO roles SET name = ?");
+        $role_add_fetch = $role_add->fetchColumn();
         $role_add->execute(array(
           $name,
-          $role_add->rowCount() - 1
         ));
         echo "Eklendi";
+      }
+    }
+
+    public function supportAdd(){
+      $db = $this->dbConnection();
+      $title = $_POST["title"];
+      $message = $_POST["message"];
+      $department = $_POST["departments"];
+
+      $support_add = $db->prepare("INSERT INTO supports SET title = ?, message = ? ,department = ?, ownerId = ?");
+      $support_add->execute(array(
+        $title,
+        $message,
+        $department,
+        $_SESSION["userAccountID"]
+      ));
+      echo "Destek talebi açıldı.";
+    }
+
+    public function getSupports(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      if($user->getPermission($_SESSION["userAccountID"]) == 1){
+        $supports = $db->prepare("SELECT * FROM supports");
+        $supports->execute();
+        if($supports->rowCount() != 0){
+          foreach ($supports as $supports_veri) {
+            $message = strip_tags($supports_veri["message"]);
+            $name = $user->getName($supports_veri["ownerId"]);
+            echo "<tr>";  
+            echo "<td>{$supports_veri['id']}</td>";
+            echo "<td>{$supports_veri['title']}</td>";
+            echo "<td>{$message}</td>";
+            echo "<td>{$name}</td>";
+            echo "<td><button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
+            echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button></td>";
+            echo "</tr>";
+          }
+        }
+      }else{
+
       }
     }
 }
@@ -154,12 +195,14 @@ class Accounts{
         if($accounts->rowCount() != 0){
           foreach ($accounts as $accounts_veri) {
               $role = $this->getPermissionName($accounts_veri["id"]);
+              $departmen_name = $this->getUserDepartment($_SESSION["userAccountID"]);
               echo "<tr>";
               echo "<td>{$accounts_veri["id"]}</td>";
               echo "<td>{$accounts_veri["firstName"]}</td>";
               echo "<td>{$accounts_veri["lastName"]}</td>";
               echo "<td>{$accounts_veri["email"]}</td>";
-              echo "<td>{$role}</td><td>";
+              echo "<td>{$role}</td>";
+              echo "<td>{$departmen_name}</td><td>";
               echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
               echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
               echo "</td></tr>";
@@ -167,7 +210,7 @@ class Accounts{
        }
      }
   }
-
+ 
   public function getUserCount(){
     $class = new classFonksiyon();
     $user = new Accounts();
@@ -186,14 +229,14 @@ class Accounts{
 
     $roles = $db->prepare("SELECT * FROM roles");
     $roles->execute();
-    $roles_fetch = $roles->fetch();
     if($roles->rowCount() != 0){
       foreach ($roles as $roles_veri) {
         echo "<tr>";
-        echo "<td>{$roles_veri["slot"]}</td>";
+        echo "<td>{$roles_veri["id"]}</td>";
         echo "<td>{$roles_veri["name"]}</td>";
         echo "<input type='hidden' value='{$roles_veri["id"]}' >";
-        echo "<td><input class='btn btn-warning btn-specly mt-2 mr-2 role_edit' type='submit' value'Düzenle'></input>";
+        echo "<td>";
+        echo "<input class='btn btn-warning btn-specly mt-2 mr-2 role_edit' type='submit' value='Düzenle'></input>";
         echo "<input class='btn btn-danger btn-specly mt-2 mr-2 role_delete' type='submit' value='Sil'></input>";
         echo "</td></tr>";
         echo "</tr>";
@@ -213,30 +256,48 @@ class Accounts{
       ));
       $accounts_fetch = $accounts->fetch();
 
-      $roles = $db->prepare("SELECT * FROM roles WHERE slot = ?");
+      $roles = $db->prepare("SELECT * FROM roles WHERE id = ?");
       $roles->execute(array(
         $accounts_fetch["permission"]
       ));
       $roles_fetch = $roles->fetch();
       
       if($accounts->rowCount() != 0){
+        if($roles_fetch == 0){
+          return "Üye";
+        }else{
         return $roles_fetch["name"];
+        }
       }else{
         return false;
       }
   }
 
-  public function getName(){
+  public function getName($id){
     $class = new classFonksiyon();
     $user = new Accounts();
     $db = $class->dbConnection();
     $accounts = $db->prepare("SELECT firstName,lastName FROM accounts WHERE id = ?");
     $accounts->execute(array(
-      $_SESSION["userAccountID"]
+      $id
     ));
     $accounts_fetch = $accounts->fetch();
     if($accounts->rowCount() != 0){
     return $accounts_fetch["firstName"]." ".$accounts_fetch["lastName"];
+    }
+  }
+
+  public function getEmail(){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    $accounts = $db->prepare("SELECT email FROM accounts WHERE id = ?");
+    $accounts->execute(array(
+      $_SESSION["userAccountID"]
+    ));
+    $accounts_fetch = $accounts->fetch();
+    if($accounts->rowCount() != 0){
+    return $accounts_fetch["email"];
     }
   }
 
@@ -291,6 +352,47 @@ class Accounts{
     }
   }//getPermission End
 
+  public function getUserDepartment($id){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    if($db){
+      $accounts = $db->prepare("SELECT department FROM accounts WHERE id = ?");
+      $accounts->execute(array(
+        $id
+      ));
+      $accounts_fetch = $accounts->fetch();
+      if($accounts->rowCount() != 0){
+        $departmen = $accounts_fetch["department"];
+        $departmen_name_select = $db->prepare("SELECT name FROM departments WHERE id = ?");
+        $departmen_name_select->execute(array(
+          $departmen
+        ));
+        $departmen_name = $departmen_name_select->fetch();
+        if($departmen_name_select->rowCount() != 0){
+          return $departmen_name["name"]; 
+        }
+      }else{
+        return "Tanımlanmamış";
+      }
+    }
+  }
+
+  public function getDepartments(){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+     if($db){
+        $departments = $db->prepare("SELECT * FROM departments");
+        $departments->execute();
+        if($departments->rowCount() != 0){
+          foreach ($departments as $departments_veri) {
+            echo "<option value='{$departments_veri['id']}'>{$departments_veri['name']}</option>";
+          }
+        }
+      }
+  }
+
   public function getLogged(){
     if(isset($_SESSION["logged"])){
           return true;
@@ -334,4 +436,8 @@ if(isset($_POST["loginBtn"])){
 
 if(isset($_POST["roleAdd"])){
   $class->roleAdd();
+}
+
+if(isset($_POST["supportadd"])){
+  $class->supportAdd();
 }

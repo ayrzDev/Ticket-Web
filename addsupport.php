@@ -1,5 +1,9 @@
 <?php
 require_once("class.function.php");
+if(!($user->getLogged())){
+    header("location: ../index.php");
+    exit;
+}
 ?>
 <html lang="tr">
 
@@ -16,6 +20,8 @@ require_once("class.function.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="apps/css/mainthemes.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="apps/js/core.js"></script>
 </head>
 
 <body>
@@ -32,30 +38,34 @@ require_once("class.function.php");
     </div>
     <div class="d-flex justify-content-center container mt-5 mb-5">
         <div class="addsupport">
-            <form class="form-floating mb-2"">
-                <input type=" email" class="form-control" id="floatingInputValue" value="test@example.com" disabled>
+            <div class="process" id="process"></div>
+            <div class="form-floating mb-2"">
+                <input type=" email" class="form-control" id="floatingInputValue" value="<?= $user->getName($_SESSION["userAccountID"]) ?>" disabled>
+                <label for="floatingInputValue">Adınız:</label>
+            </div>
+            <div class="form-floating mb-2"">
+                <input type=" email" class="form-control" id="floatingInputValue" value="<?= $user->getEmail() ?>" disabled>
                 <label for="floatingInputValue">E-Posta Adresiniz:</label>
-            </form>
+            </div>
             <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="floatingInputValue" value="Deneme">
+                <input type="text" class="form-control" id="floatingInputValue" name="title" value="Deneme">
                 <label for="floatingInputValue">Konu başlığı:</label>
             </div>
             <div class="form-floating mb-2">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <select class="form-select" id="floatingSelect" name="departments" aria-label="Floating label select example">
                     <option selected>Departman Seçiniz</option>
-                    <option value="1">Destek Ekibi</option>
-                    <option value="2">Teknik Destek</option>
+                    <?= $user->getDepartments(); ?>
                 </select>
                 <label for="floatingSelect">Departman:</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea name="editor1"></textarea>
+                <textarea name="editor1" require></textarea>
             </div>
             <div class="form-floating mb-2">
 
             </div>
             <div class="form-floating mb-2 text-center d-flex justify-content-center">
-                <button type="submit" class="btn btn-secondary mb-3 ">Gönder</button>
+                <input type="submit" class="btn btn-secondary mb-3 supportadd" name="supportadd" value="Gönder"></input>
             </div>
         </div>
     </div>

@@ -53,14 +53,15 @@ if(!($user->getLoggedMod())){
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Ad</th>
-                        <th>Soyad</th>
-                        <th>Email</th>
-                        <th>Yetki</th>
+                        <th>Başlık</th>
+                        <th>Mesaj</th>
+                        <th>Oluşturan</th>
+                        <th>İşlem</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
+                        $class->getSupports();
                       ?>
                     </tbody>
                   </table>

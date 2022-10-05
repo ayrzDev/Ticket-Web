@@ -56,6 +56,7 @@ if(!($user->getLoggedMod())){
                       <th>Soyad</th>
                       <th>Email</th>
                       <th>Yetki</th>
+                      <th>Departman</th>
                       <th>İşlem</th>
                     </tr>
                   </thead>
