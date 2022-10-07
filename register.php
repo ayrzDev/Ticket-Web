@@ -1,5 +1,5 @@
 <?php
-require_once("class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 ?>
 <html lang="tr">
 
@@ -15,9 +15,9 @@ require_once("class.function.php");
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     
-    <link rel="stylesheet" href="apps/css/mainthemes.css">
+    <link rel="stylesheet" href="resources/css/mainthemes.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
-    <script src="apps/js/core.js"></script>
+    <script src="resources/js/core.js"></script>
 </head>
 
 <body>

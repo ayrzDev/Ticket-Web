@@ -1,5 +1,5 @@
 <?php
-include(__DIR__."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 if(!($user->getLogged())){
     header("location: ../index.php");
     exit;
@@ -17,13 +17,15 @@ if(!($user->getLogged())){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="apps/css/mainthemes.css">
+    <link rel="stylesheet" href="resources/css/mainthemes.css">
 </head>
 
 <body>
     <div class="navcontainer">
-        <?php include("apps/includes/navbar.php"); ?>
-    </div>
+    <?php
+      include("pages/navbar.php");
+    ?>
+        </div>
     <div class="defaultheader">
         <div class="title">
             <h1>Destek Taleplerim</h1>
@@ -57,6 +59,6 @@ if(!($user->getLogged())){
         </table>
     </div>
 </body>
-<script src="apps/js/script.js"></script>
+<script src="resources/js/script.js"></script>
 
 </html>

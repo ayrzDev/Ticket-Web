@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 
 if(!($user->getLoggedMod())){
   header("location: ../index.php");
@@ -34,12 +34,12 @@ if(!($user->getLoggedMod())){
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Kullanıcılar
-          <small>Buradan kullanıcıları yönetebilirsin!</small>
+          Roller
+          <small>Buradan rolleri yönetebilirsin!</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Ana Sayfa</a></li>
-          <li class="active">Kullanıcılar</li>
+          <li class="active">Roller</li>
         </ol>
       </section>
 

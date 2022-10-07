@@ -1301,7 +1301,7 @@ a:focus {
     z-index: 0;
     font-size: 90px;
     color: rgba(0, 0, 0, 0.15);
-    top: 5px;
+    /* top: 5px; */
 }
 
 .small-box:hover {

@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 
 if(!($user->getLoggedMod())){
   header("location: ../index.php");

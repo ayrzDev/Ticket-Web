@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 
 if(!($user->getLoggedMod())){
   header("location: ../index.php");
@@ -29,48 +29,10 @@ if(!($user->getLoggedMod())){
 
 <body class="skin-red fixed">
   <div class="wrapper">
-    <header class="main-header">
-      <a href="index.php" class="logo"><b>Gapp</b>ze</a>
-      <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
-        </a>
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <li class="dropdown messages-menu">
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="user-image" alt="User Image" />
-                <span class="hidden-xs">Ahmet DOĞRU</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="user-header">
-                  <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle" alt="User Image" />
-                  <p>
-                    Ahmet DOĞRU
-                    <small>Yönetici</small>
-                  </p>
-                </li>
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profil</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Çıkış yap</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <aside class="main-sidebar">
-      <?php
-        include "apps/includes/navbar.php";
-      ?>
-    </aside>
-
+  <?php
+    include("apps/includes/header.php");
+    include("apps/includes/navbar.php");
+    ?>
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
@@ -88,7 +50,7 @@ if(!($user->getLoggedMod())){
           <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-aqua">
               <div class="inner">
-                <h3>150</h3>
+                <h3><?= $user->getTicketCount(0) ?></h3>
                 <p>Aktif Destek</p>
               </div>
               <div class="icon">
@@ -99,7 +61,7 @@ if(!($user->getLoggedMod())){
           <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-red">
               <div class="inner">
-                <h3>53</h3>
+              <h3><?= $user->getTicketCount(1) ?></h3>
                 <p>Kapatılan Talepler</p>
               </div>
               <div class="icon">

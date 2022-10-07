@@ -1,147 +1,6 @@
 <?php
-session_start();
 
-class classFonksiyon {
-
-    private $settings = __DIR__."/settings.json";
-    private $host;
-    private $username;
-    private $password;
-    private $database;
-
-    public function __construct()
-    {
-      $jsonVeri = file_get_contents($this->settings);
-      $jsonVeri = json_decode($jsonVeri,true);
-      $this->host = $jsonVeri["host"];
-      $this->username = $jsonVeri["user"];
-      $this->password = $jsonVeri["password"];
-      $this->database = $jsonVeri["database"];
-    }
-
-    public function dbConnection(){
-      try {
-        $conn = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8", $this->username, $this->password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $message = "Connected successfully";
-      } catch(PDOException $e) {
-        $message = "Connection failed: " . $e->getMessage();
-      }
-      // echo "<script> console.log('{$message}')</script>";
-      return $conn;
-    }
-
-    public function pagesAll($location,$permission){
-      $db = $this->dbConnection();
-      $user = new Accounts();
-      if($db){
-        if($location == 1){
-          $page = $db->prepare("SELECT * FROM pages WHERE location = ?");
-          $page->execute(array(
-            $location
-          ));    
-          if($page->rowCount() != 0){
-            foreach ($page as $page_veri) {
-                if($page_veri["permission"] == $permission){
-                echo "<li class='treeview'>";
-                echo "<a href='{$page_veri["src"]}'>";
-                echo "<i class='{$page_veri["icon"]}'></i> <span>{$page_veri["name"]}</span>";
-                echo "</a>";
-                echo "</li>"; 
-                }
-            }
-        }
-        }else{
-          $page = $db->prepare("SELECT * FROM pages WHERE location = ?");
-          $page->execute(array(
-            $location
-          ));    
-          if($page->rowCount() != 0){
-            foreach ($page as $page_veri) {
-              if($user->getLogged()){
-                if($page_veri["isLogged"] != 0 || $page_veri["isLogged"] == 0){  
-                  echo '<li class="nav-item">';
-                  echo "<i class='fa fa-ticket'></i><a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
-                  echo '</li>';
-                }
-              }else{
-                if($page_veri["isLogged"] == 0){  
-                  echo '<li class="nav-item">';
-                  echo "<i class='fa fa-ticket'></i><a class='nav-link' href='{$page_veri["src"]}'>{$page_veri["name"]}</a>";
-                  echo '</li>';
-                }
-              }
-            }
-        }
-      }
-    }
-    }
-
-    public function getWebKey(){
-      $key = array(
-        "host" => $this->host,
-        "user" => $this->user,
-        "password" => $this->password,
-        "database" => $this->database
-      );
-      return $key;
-    }
-
-    public function roleAdd(){
-      $db = $this->dbConnection();
-      $name = trim($_POST["roleName"]);
-
-      if($db){
-        $role_add = $db->prepare("INSERT INTO roles SET name = ?");
-        $role_add_fetch = $role_add->fetchColumn();
-        $role_add->execute(array(
-          $name,
-        ));
-        echo "Eklendi";
-      }
-    }
-
-    public function supportAdd(){
-      $db = $this->dbConnection();
-      $title = $_POST["title"];
-      $message = $_POST["message"];
-      $department = $_POST["departments"];
-
-      $support_add = $db->prepare("INSERT INTO supports SET title = ?, message = ? ,department = ?, ownerId = ?");
-      $support_add->execute(array(
-        $title,
-        $message,
-        $department,
-        $_SESSION["userAccountID"]
-      ));
-      echo "Destek talebi açıldı.";
-    }
-
-    public function getSupports(){
-      $db = $this->dbConnection();
-      $user = new Accounts();
-      if($user->getPermission($_SESSION["userAccountID"]) == 1){
-        $supports = $db->prepare("SELECT * FROM supports");
-        $supports->execute();
-        if($supports->rowCount() != 0){
-          foreach ($supports as $supports_veri) {
-            $message = strip_tags($supports_veri["message"]);
-            $name = $user->getName($supports_veri["ownerId"]);
-            echo "<tr>";  
-            echo "<td>{$supports_veri['id']}</td>";
-            echo "<td>{$supports_veri['title']}</td>";
-            echo "<td>{$message}</td>";
-            echo "<td>{$name}</td>";
-            echo "<td><button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
-            echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button></td>";
-            echo "</tr>";
-          }
-        }
-      }else{
-
-      }
-    }
-}
+require_once("functionBase.php");
 
 class Accounts{
   
@@ -215,9 +74,22 @@ class Accounts{
     $class = new classFonksiyon();
     $user = new Accounts();
     $db = $class->dbConnection();
+    if($db){
+      $roles = $db->prepare("SELECT * FROM accounts");
+      $roles->execute();
+      return $roles->rowCount();
+    }
+  }
+
+  public function getTicketCount($number){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
   
-    $roles = $db->prepare("SELECT * FROM accounts");
-    $roles->execute();
+    $roles = $db->prepare("SELECT * FROM supports WHERE status = ?");
+    $roles->execute(array(
+      $number
+    ));
     return $roles->rowCount();
   }
 
@@ -422,22 +294,3 @@ class Accounts{
     }
   }
 }//AccountClass End
-
-$class = new classFonksiyon();
-$user = new Accounts();
-
-if(isset($_POST["registerBtn"])){
-  $user->createAccount();
-}
-
-if(isset($_POST["loginBtn"])){
-  $user->loginAccount();
-}
-
-if(isset($_POST["roleAdd"])){
-  $class->roleAdd();
-}
-
-if(isset($_POST["supportadd"])){
-  $class->supportAdd();
-}

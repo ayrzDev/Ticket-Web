@@ -6,7 +6,7 @@ $(function() {
         var pass = $("input[name=registerPassword]").val();
         var registerButton = $("input[name=registerButton]").val();
         $.ajax({
-            url: "class.function.php",
+            url: "functions/class.function.php",
             type: "POST",
             data: {
                 "name": name,
@@ -52,7 +52,7 @@ $(function() {
         var password = $("input[name=loginPassword]").val();
         var loginBtn = $("input[name=loginBtn]").val();
         $.ajax({
-            url: "class.function.php",
+            url: "functions/class.function.php",
             type: "POST",
             data: {
                 "email": email,
@@ -86,7 +86,7 @@ $(function() {
         var name = $("input[name=role-name]").val();
         var roleadd = $("input[name=role-add]").val();
         $.ajax({
-            url: "../class.function.php",
+            url: "../functions/class.function.php",
             type: "POST",
             data: {
                 "roleName": name,
@@ -110,7 +110,7 @@ $(function() {
         var message = CKEDITOR.instances.editor1.getData();
         var supportadd = $("input[name=supportadd]").val();
         $.ajax({
-            url: "class.function.php",
+            url: "functions/class.function.php",
             type: "POST",
             data: {
                 "title": title,
@@ -120,14 +120,19 @@ $(function() {
             },
             success: function(sonuc) {
                 $(".process").html(sonuc);
-                // alert(message)
-                // if(message == null || message == " "){
-                //     $(".process").addClass("alert alert-danger");
-                //     $(".process").html("Lütfen boş alan bırakmayınız.");
-                // }else{
-                //     $(".process").removeClass("alert alert-success");
-                //     $(".process").html("");
-                // }
+                if (title == "" && message == "") {
+                    $(".process").addClass("alert alert-danger");
+                    $(".process").html("Lütfen boş alan bırakmayınız.");   
+                }
+                if (departments == 0) {
+                    $(".process").addClass("alert alert-danger");
+                    $(".process").html("Departman seçiniz.");   
+                }
+
+                if (departments != 0 && title != "" && message != "") {
+                    $(".process").removeClass("alert alert-danger");
+                    $(".process").addClass("alert alert-success");
+                }
             }
         });
     });

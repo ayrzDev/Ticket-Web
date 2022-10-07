@@ -1,5 +1,5 @@
 <?php
-include(__DIR__."/class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 
 if(($user->getLogged())){
     header("location: ../index.php");
@@ -20,9 +20,9 @@ if(($user->getLogged())){
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="apps/css/mainthemes.css">
+    <link rel="stylesheet" href="resources/css/mainthemes.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
-    <script src="apps/js/core.js"></script>
+    <script src="resources/js/core.js"></script>
 </head>
 
 <body>

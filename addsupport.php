@@ -1,5 +1,5 @@
 <?php
-require_once("class.function.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
 if(!($user->getLogged())){
     header("location: ../index.php");
     exit;
@@ -19,14 +19,14 @@ if(!($user->getLogged())){
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="apps/css/mainthemes.css">
+    <link rel="stylesheet" href="resources/css/mainthemes.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
-    <script src="apps/js/core.js"></script>
+    <script src="resources/js/core.js"></script>
 </head>
 
 <body>
     <div class="navcontainer">
-        <?php include("apps/includes/navbar.php"); ?>
+        <?php include("pages/navbar.php"); ?>
     </div>
     <div class="defaultheader">
         <div class="title">
@@ -48,12 +48,12 @@ if(!($user->getLogged())){
                 <label for="floatingInputValue">E-Posta Adresiniz:</label>
             </div>
             <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="floatingInputValue" name="title" value="Deneme">
+                <input type="text" class="form-control" id="floatingInputValue" name="title">
                 <label for="floatingInputValue">Konu başlığı:</label>
             </div>
             <div class="form-floating mb-2">
                 <select class="form-select" id="floatingSelect" name="departments" aria-label="Floating label select example">
-                    <option selected>Departman Seçiniz</option>
+                    <option selected value="0">Departman Seçiniz</option>
                     <?= $user->getDepartments(); ?>
                 </select>
                 <label for="floatingSelect">Departman:</label>
@@ -70,8 +70,8 @@ if(!($user->getLogged())){
         </div>
     </div>
 </body>
-<script src="apps/js/script.js"></script>
-<script src="apps/ckeditor/ckeditor.js"></script>
-<script src="apps/js/ckeditor.js"></script>
+<script src="resources/js/script.js"></script>
+<script src="resources/ckeditor/ckeditor.js"></script>
+<script src="resources/js/ckeditor.js"></script>
 
 </html>
