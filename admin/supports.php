@@ -57,7 +57,7 @@ if(!($user->getLoggedMod())){
                         <th style="width: 200px;">Mesaj</th>
                         <th style="width: 120px;">Oluşturan</th>
                         <th style="width: 100px;">Durum</th>
-                        <th style="width: 100px;">İşlem</th>
+                        <th style="width: 200px;">İşlem</th>
                       </tr>
                     </thead>
                     <tbody>

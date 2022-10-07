@@ -54,7 +54,7 @@ class Accounts{
         if($accounts->rowCount() != 0){
           foreach ($accounts as $accounts_veri) {
               $role = $this->getPermissionName($accounts_veri["id"]);
-              $departmen_name = $this->getUserDepartment($_SESSION["userAccountID"]);
+              $departmen_name = $this->getUserDepartmentName($_SESSION["userAccountID"]);
               echo "<tr>";
               echo "<td>{$accounts_veri["id"]}</td>";
               echo "<td>{$accounts_veri["firstName"]}</td>";
@@ -224,7 +224,7 @@ class Accounts{
     }
   }//getPermission End
 
-  public function getUserDepartment($id){
+  public function getUserDepartmentName($id){
     $class = new classFonksiyon();
     $user = new Accounts();
     $db = $class->dbConnection();
@@ -249,6 +249,27 @@ class Accounts{
       }
     }
   }
+
+  public function getUserDepartment($id){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    if($db){
+      $accounts = $db->prepare("SELECT department FROM accounts WHERE id = ?");
+      $accounts->execute(array(
+        $id
+      ));
+      $accounts_fetch = $accounts->fetch();
+      if($accounts->rowCount() != 0){
+        $departmen = $accounts_fetch["department"];
+          return $departmen; 
+      }else{
+        return "Tanımlanmamış";
+      }
+    }
+  }
+
+
 
   public function getDepartments(){
     $class = new classFonksiyon();

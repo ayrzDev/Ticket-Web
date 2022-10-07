@@ -6,7 +6,7 @@
             </div>
             <div class="pull-left info">
                 <p><?= $user->getName($_SESSION["userAccountID"]); ?></p>
-                <a><?= $user->getPermissionName($_SESSION["userAccountID"])." ".$user->getUserDepartment($_SESSION["userAccountID"]); ?></a>
+                <a><?= $user->getPermissionName($_SESSION["userAccountID"])." ".$user->getUserDepartmentName($_SESSION["userAccountID"]); ?></a>
             </div>
         </div>
         <form action="#" method="get" class="sidebar-form">

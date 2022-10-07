@@ -127,11 +127,12 @@ class classFonksiyon {
       $db = $this->dbConnection();
       $user = new Accounts();
       $extra = new extraClass();
-      if($user->getPermission($_SESSION["userAccountID"]) == 1){
+      if($user->getPermission($_SESSION["userAccountID"]) != 0){
         $supports = $db->prepare("SELECT * FROM supports");
         $supports->execute();
         if($supports->rowCount() != 0){
           foreach ($supports as $supports_veri) {
+            if($user->getUserDepartment($_SESSION["userAccountID"]) == $supports_veri["department"] || $user->getPermission($_SESSION["userAccountID"]) == 1){
             $message = $extra->kisalt(strip_tags($supports_veri["message"]),25);
             $title = $extra->kisalt($supports_veri['title'],10);
             $name = $user->getName($supports_veri["ownerId"]);
@@ -146,9 +147,26 @@ class classFonksiyon {
             echo "<td>{$message}</td>";
             echo "<td>{$extra->kisalt($name,15)}</td>";
             echo "<td>{$stats[$supports_veri["status"]]}</td>";
-            echo "<td><button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
-            echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button></td>";
+
+            echo "<td>";
+            if($user->getPermission($_SESSION["userAccountID"]) == 1){
+              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'>Yanıtla</button>";
+              echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+            }else{
+              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'>Yanıtla</button>";
+            }
+            if($supports_veri["status"] == 2){
+              echo "<button class='btn btn-success btn-specly mt-2 mr-2' type='button'>Aç</button>";
+            }else{
+              if($supports_veri["status"] != 3){
+              echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Sonlandır</button>";
+              }
+            }
+
+            echo "</td>";
+
             echo "</tr>";
+          }
           }
         }
       }else{
