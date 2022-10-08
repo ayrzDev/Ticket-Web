@@ -30,4 +30,12 @@ if(isset($_POST["supportadd"])){
   $class->supportAdd();
 }
 
+if(isset($_POST["removeData"])){
+  $class->removeSupport();
+}
+
+if(isset($_POST["yenile"])){
+  $class->getSupports($_POST["frame"]);
+}
+
 ?>

@@ -8,30 +8,30 @@ if(!($user->getLoggedMod())){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8">
   <title>Gappze | Dashboard</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <link href="apps/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-  <link href="apps/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-  <link href="apps/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />,
+  <link href="resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />,
 </head>
 
 <body class="skin-red fixed">
   <div class="wrapper">
   <?php
-    include("apps/includes/header.php");
-    include("apps/includes/navbar.php");
+    include("pages/header.php");
+    include("pages/navbar.php");
     ?>
     <div class="content-wrapper">
       <section class="content-header">
@@ -90,7 +90,7 @@ if(!($user->getLoggedMod())){
               </div>
               <div class="box-body chat" id="chat-box">
                 <div class="item">
-                  <img src="apps/img/user4-128x128.jpg" alt="user image" class="online" />
+                  <img src="resources/img/user4-128x128.jpg" alt="user image" class="online" />
                   <p class="message">
                     <a href="#" class="name">
                       <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
@@ -111,7 +111,7 @@ if(!($user->getLoggedMod())){
                   </div>
                 </div>
                 <div class="item">
-                  <img src="apps/img/user3-128x128.jpg" alt="user image" class="offline" />
+                  <img src="resources/img/user3-128x128.jpg" alt="user image" class="offline" />
                   <p class="message">
                     <a href="#" class="name">
                       <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
@@ -123,7 +123,7 @@ if(!($user->getLoggedMod())){
                   </p>
                 </div>
                 <div class="item">
-                  <img src="apps/img/user2-160x160.jpg" alt="user image" class="offline" />
+                  <img src="resources/img/user2-160x160.jpg" alt="user image" class="offline" />
                   <p class="message">
                     <a href="#" class="name">
                       <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
@@ -163,24 +163,24 @@ if(!($user->getLoggedMod())){
   </script>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="apps/plugins/morris/morris.min.js" type="text/javascript"></script>
-  <script src="apps/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-  <script src="apps/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-  <script src="apps/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-  <script src="apps/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-  <script src="apps/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-  <script src="apps/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-  <script src="apps/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-  <script src="apps/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-  <script src="apps/js/pages/dashboard.js" type="text/javascript"></script>
-  <script src="apps/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-  <script src="apps/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="apps/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-  <script src="apps/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-  <script src="apps/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-  <script src='apps/plugins/fastclick/fastclick.min.js'></script>
-  <script src="apps/js/app.min.js" type="text/javascript"></script>
-  <script src="apps/js/demo.js" type="text/javascript"></script>
+  <script src="resources/plugins/morris/morris.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+  <script src="resources/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+  <script src="resources/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+  <script src="resources/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+  <script src="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+  <script src="resources/js/pages/dashboard.js" type="text/javascript"></script>
+  <script src="resources/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+  <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+  <script src="resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+  <script src="resources/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+  <script src='resources/plugins/fastclick/fastclick.min.js'></script>
+  <script src="resources/js/app.min.js" type="text/javascript"></script>
+  <script src="resources/js/demo.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(function () {
       $("#example1").dataTable();

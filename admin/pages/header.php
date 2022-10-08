@@ -11,12 +11,12 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="user-image" alt="User Image" />
+                        <img src="/resources/img/user.jpg" class="user-image" alt="User Image" />
                         <span class="hidden-xs"><?= $user->getName($_SESSION["userAccountID"]); ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle" alt="User Image" />
+                            <img src="/resources/img/user.jpg" class="img-circle" alt="User Image" />
                             <p>
                             <?= $user->getName($_SESSION["userAccountID"]); ?>
                             <small><?= $user->getPermissionName($_SESSION["userAccountID"]); ?></small>

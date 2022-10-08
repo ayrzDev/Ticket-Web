@@ -2,11 +2,11 @@
     <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="https://avatars.githubusercontent.com/u/71610210?v=4" class="img-circle" alt="User Image" />
+                <img src="/resources/img/user.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
                 <p><?= $user->getName($_SESSION["userAccountID"]); ?></p>
-                <a><?= $user->getPermissionName($_SESSION["userAccountID"])." ".$user->getUserDepartmentName($_SESSION["userAccountID"]); ?></a>
+                <a style="font-size: 15px"><?= $user->getPermissionName($_SESSION["userAccountID"]) ?></a>
             </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -22,6 +22,7 @@
              <?php
                 $class->pagesAll(1,0);
             ?>  
+            
         </ul>
     </section>
     <!-- /.sidebar -->

@@ -44,11 +44,31 @@ class classFonksiyon {
           if($page->rowCount() != 0){
             foreach ($page as $page_veri) {
                 if($page_veri["permission"] == $permission){
-                echo "<li class='treeview'>";
-                echo "<a href='{$page_veri["src"]}'>";
-                echo "<i class='{$page_veri["icon"]}'></i> <span>{$page_veri["name"]}</span>";
-                echo "</a>";
-                echo "</li>"; 
+                  if($page_veri["isDropdown"] == 1){
+                  echo "
+                  <li class='treeview'>
+                  <a href='#'>
+                  <i class='{$page_veri["icon"]}'></i> 
+                  <span>{$page_veri["name"]}</span></a>";
+                    $getElements = $db->prepare("SELECT * FROM pages WHERE dropdown = ?");
+                    $getElements->execute(array(
+                      $page_veri["id"]
+                    ));
+                    echo '<ul class="treeview-menu">';
+                    foreach ($getElements as $page_element) {
+                        // echo $page_element["name"];
+                        echo "<li><a href='{$page_element["src"]}'><i class='fa fa-circle-o'></i> {$page_element["name"]}</a></li>";               
+                    }
+                    echo "</ul></li>";
+                  }else{
+                    if($page_veri["dropdown"] == 0){
+                    echo "<li class='treeview'>";
+                    echo "<a href='{$page_veri["src"]}'>";
+                    echo "<i class='{$page_veri["icon"]}'></i> <span>{$page_veri["name"]}</span>";
+                    echo "</a>";
+                    echo "</li>"; 
+                    }
+                  }
                 }
             }
         }
@@ -123,23 +143,32 @@ class classFonksiyon {
       }
     }
 
-    public function getSupports(){
+    public function getSupports($role){
       $db = $this->dbConnection();
       $user = new Accounts();
       $extra = new extraClass();
+      if($db){
       if($user->getPermission($_SESSION["userAccountID"]) != 0){
-        $supports = $db->prepare("SELECT * FROM supports");
-        $supports->execute();
+        if($role != null){
+          $supports = $db->prepare("SELECT * FROM supports WHERE status = ?");
+          $supports->execute(array(
+            $role
+          ));
+        }else{
+          $supports = $db->prepare("SELECT * FROM supports");
+          $supports->execute();
+        }
         if($supports->rowCount() != 0){
           foreach ($supports as $supports_veri) {
             if($user->getUserDepartment($_SESSION["userAccountID"]) == $supports_veri["department"] || $user->getPermission($_SESSION["userAccountID"]) == 1){
-            $message = $extra->kisalt(strip_tags($supports_veri["message"]),25);
-            $title = $extra->kisalt($supports_veri['title'],10);
+            $message = $extra->kisalt(strip_tags($supports_veri["message"]),30);
+            $title = $extra->kisalt($supports_veri['title'],20);
             $name = $user->getName($supports_veri["ownerId"]);
             $stats = array(
               0 => "<p class='text-success bg-success text-center'>Açık</p>",
               1 => "<p class='text-warning bg-warning text-center'>Beklemede</p>",
-              2 => "<p class='text-danger bg-danger text-center'>Kapalı</p>"
+              2 => "<p class='text-danger bg-danger text-center'>Kapalı</p>",
+              3 => "<p class='text-info bg-info text-center'>Yanıtlandı</p>"
             );
             echo "<tr>";  
             echo "<td>{$supports_veri['id']}</td>";
@@ -147,20 +176,17 @@ class classFonksiyon {
             echo "<td>{$message}</td>";
             echo "<td>{$extra->kisalt($name,15)}</td>";
             echo "<td>{$stats[$supports_veri["status"]]}</td>";
-
             echo "<td>";
             if($user->getPermission($_SESSION["userAccountID"]) == 1){
-              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'>Yanıtla</button>";
-              echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'><i class='fa fa-eye'></i></button>";
+              echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$supports_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
             }else{
-              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'>Yanıtla</button>";
+              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'><i class='fa fa-eye'></i></button>";
             }
             if($supports_veri["status"] == 2){
               echo "<button class='btn btn-success btn-specly mt-2 mr-2' type='button'>Aç</button>";
             }else{
-              if($supports_veri["status"] != 3){
-              echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Sonlandır</button>";
-              }
+               echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'><i class='fa fa-times-circle text-light'></i></button>";
             }
 
             echo "</td>";
@@ -171,6 +197,20 @@ class classFonksiyon {
         }
       }else{
 
+      }
+    }
+    }
+
+    public function removeSupport(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $remove_prp = $db->prepare("DELETE FROM supports WHERE id = ?");
+        $remove_prp->execute(array(
+          $_POST["key"]
+        ));
+        echo "Silindi";
       }
     }
 }

@@ -14,21 +14,21 @@ if(!($user->getLoggedMod())){
   <meta charset="UTF-8">
   <title>Gappze - Kullanıcılar</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <link href="apps/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
     type="text/css" />
   <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-  <link href="apps/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-  <link href="apps/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-  <link href="apps/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+  <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="skin-red">
   <div class="wrapper">
 
     <?php
-    include("apps/includes/header.php");
-    include("apps/includes/navbar.php");
+    include("pages/header.php");
+    include("pages/navbar.php");
     ?>
 
     <div class="content-wrapper">
@@ -75,25 +75,25 @@ if(!($user->getLoggedMod())){
       </section>
     </div>
     <?php
-      include("apps/includes/footer.php");
+      include("pages/footer.php");
     ?>
   </div><!-- ./wrapper -->
 
   <!-- jQuery 2.1.3 -->
-  <script src="apps/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+  <script src="resources/plugins/jQuery/jQuery-2.1.3.min.js"></script>
   <!-- Bootstrap 3.3.2 JS -->
-  <script src="apps/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   <!-- DATA TABES SCRIPT -->
-  <script src="apps/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-  <script src="apps/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+  <script src="resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+  <script src="resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
   <!-- SlimScroll -->
-  <script src="apps/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+  <script src="resources/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
   <!-- FastClick -->
-  <script src='apps/plugins/fastclick/fastclick.min.js'></script>
+  <script src='resources/plugins/fastclick/fastclick.min.js'></script>
   <!-- AdminLTE App -->
-  <script src="apps/js/app.min.js" type="text/javascript"></script>
+  <script src="resources/js/app.min.js" type="text/javascript"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="apps/js/demo.js" type="text/javascript"></script>
+  <script src="resources/js/demo.js" type="text/javascript"></script>
   <!-- page script -->
   <script type="text/javascript">
     $(function () {

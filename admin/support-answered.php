@@ -43,7 +43,7 @@ if(!($user->getLoggedMod())){
           <li class="active">Kullanıcılar</li>
         </ol>
       </section>
-      <div id="callback"></div>
+
       <section class="content">
           <div class="row">
             <div class="col-xs-12">
@@ -60,9 +60,9 @@ if(!($user->getLoggedMod())){
                         <th style="width: 100px;">İşlem</th>
                       </tr>
                     </thead>
-                    <tbody class="dataCenter" id="null">
+                    <tbody>
                       <?php
-                        $class->getSupports(null);
+                        $class->getSupports(3);
                       ?>
                     </tbody>
                   </table>
@@ -108,6 +108,5 @@ if(!($user->getLoggedMod())){
   </script>
 
 </body>
-<script src="resources/js/core.js"></script>
 
 </html>
