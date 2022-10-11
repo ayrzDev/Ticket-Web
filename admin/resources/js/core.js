@@ -4,6 +4,7 @@ $(document).on("click", '.deleteBtn', function(e) {
     var key = $(this).attr('id');
     deleteSupport(data,key);
 });
+
 $(document).on("click", '.endBtn', function(e) {
     e.preventDefault();
     var data = $("button[name=endBtn]").val();
@@ -21,34 +22,35 @@ $(document).on("click", '.openBtn', function(e) {
 $(document).on("click", '.sendMessageTicket', function(e) {
     e.preventDefault();
     var data = $("button[name=sendMessageTicket]").val();
+    var sendmessage = $("input[name=ticket-message]").val();
     var key = $(this).attr('id');
-    sendMessageTicket(data,key);
+    sendMessageTicket(data,key,sendmessage);
 });
 
-function sendMessageTicket(data,key) {
+function sendMessageTicket(data,key,sendmessage) {
     if (confirm(key+" Mesajı göndermek istiyor musunuz ?")) {
     $.ajax({
         url: "/functions/functionBase.php",
         type: "POST",
         data: {
             "key": key,
+            "message": sendmessage,
             "sendMessageTicket": data
         },
         success: function (sonuc) {
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
-            yenile(data);
+            supportyenile(data,key);
         }        
     });
 }
 }
 
-function supportyenile(data){
-    var frame = $(".box-area").attr('id');
+function supportyenile(data,key){
     $.ajax({
         type:'POST',
         url: "/functions/functionBase.php",
         data: {
-            "frame": frame,
+            "id": key,
             "supportyenile": data,
         },
         success: function (msg) {
@@ -68,7 +70,7 @@ function openSupport(data,key) {
         },
         success: function (sonuc) {
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
-            yenile(data);
+            // su(data);
         }        
     });
 }

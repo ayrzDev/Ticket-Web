@@ -233,8 +233,8 @@ class Accounts{
       $accounts->execute(array(
         $id
       ));
-      $accounts_fetch = $accounts->fetch();
       if($accounts->rowCount() != 0){
+        $accounts_fetch = $accounts->fetch();
         $departmen = $accounts_fetch["department"];
         $departmen_name_select = $db->prepare("SELECT name FROM departments WHERE id = ?");
         $departmen_name_select->execute(array(

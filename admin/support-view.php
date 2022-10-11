@@ -20,8 +20,8 @@ $class->checkSupport($_GET["id"]);
     <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-    <script src="/resources/js/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="resources/js/core.js"></script>
 </head>
 
 <body class="skin-blue">
@@ -37,9 +37,9 @@ $class->checkSupport($_GET["id"]);
                     <small>İnceleniyor</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="#">Forms</a></li>
-                    <li class="active">General Elements</li>
+                    <li><a href="/admin/index.php"><i class="fa fa-dashboard"></i> Ana Sayfa</a></li>
+                    <li><a href="supports.php">Destek Talepleri</a></li>
+                    <li class="active">Ticket #<?= $_GET["id"]?></li>
                 </ol>
             </section>
 

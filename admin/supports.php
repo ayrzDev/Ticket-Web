@@ -40,7 +40,7 @@ if(!($user->getLoggedMod())){
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Ana Sayfa</a></li>
-          <li class="active">Kullanıcılar</li>
+          <li class="active">Destek Talepleri</li>
         </ol>
       </section>
       <div id="callback"></div>

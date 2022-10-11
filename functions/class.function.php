@@ -196,7 +196,6 @@ class classFonksiyon {
           }
         }
       }else{
-
       }
     }
     }
@@ -206,10 +205,25 @@ class classFonksiyon {
       $user = new Accounts();
       $extra = new extraClass();
       if($db){
-        $supports = $db->prepare("SELECT * FROM supports WHERE id = ?");
-        $supports->execute(array(
-          $_GET["id"]
-        ));
+        if(isset($_POST["id"])){
+          $supports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+          $supports->execute(array(
+            $_POST["id"]
+          ));
+          $supports_data = $db->prepare("SELECT * FROM supportdata WHERE supportId = ?");
+          $supports_data->execute(array(
+            $_POST["id"]
+          ));
+        }else{
+          $supports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+          $supports->execute(array(
+            $_GET["id"]
+          ));
+          $supports_data = $db->prepare("SELECT * FROM supportdata WHERE supportId = ?");
+          $supports_data->execute(array(
+            $_GET["id"]
+          ));
+        }
         $support_fetch = $supports->fetch();
         if($user->getUserDepartment($_SESSION["userAccountID"]) == $support_fetch["department"] || $user->getPermission($_SESSION["userAccountID"]) == 1){
          echo '<div class="user-box">
@@ -222,10 +236,7 @@ class classFonksiyon {
          echo "<div class='descri-user'>{$support_fetch["message"]}</div>
             </div>
         </div>";
-        $supports_data = $db->prepare("SELECT * FROM supportdata WHERE supportId = ?");
-        $supports_data->execute(array(
-          $_GET["id"]
-        ));
+     
         foreach($supports_data as $supportsall){
           echo '<div class="user-box">
           <img src="/resources/img/user.jpg"  class="user-image" alt="" style="width: 100px;">
@@ -249,13 +260,17 @@ class classFonksiyon {
         echo "<div class='box-footer'>
         <div class='input-group'>
         <input class='form-control' name='ticket-message' placeholder='Mesaj yazınız...'>
-        <div class='input-group-btn'>
-            <button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
-            if($support_fetch["status"] != 2){
-            echo "<button class='btn btn-warning'><i class='fa fa-times-circle text-light'></i><span style='margin-left: 5px;'>Kapat</span></button>";
-            }else{
-              echo "<button class='btn btn-info'><i class='fa fa-check text-light'></i><span style='margin-left: 5px;'>Aç</span></button>";
-            }
+        <div class='input-group-btn'>";
+        if(isset($_POST["id"])){
+          echo "<button class='btn btn-success sendMessageTicket' id='{$_POST["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
+        }else{
+          echo "<button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
+        }
+        if($supportsall["status"] == 2){
+          echo "<button class='btn btn-success btn-specly mt-2 mr-2 openBtn' id='{$_GET["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
+        }else{
+          echo "<button class='btn btn-warning btn-specly mt-2 mr-2 endBtn' id='{$_GET["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
+        }
 
             echo "
         </div>
@@ -317,7 +332,7 @@ class classFonksiyon {
           0,
           $_POST["key"]
         ));
-        echo "Sonlandırıldı!";
+        echo "Açıldı!";
       }
     }
 
@@ -360,7 +375,7 @@ class classFonksiyon {
       $extra = new extraClass();
       if($db){
         $id = $_POST["key"];
-        $replyer = $user->getName($_SESSION["userAccountID"]);
+        $replyer = $_SESSION["userAccountID"];
         $support = $db->prepare("SELECT ownerId FROM supports WHERE id = ?");
         $support->execute(array(
           $id
@@ -372,7 +387,7 @@ class classFonksiyon {
           $id,
           $owner,
           $replyer,
-          $_POST["sendMessageTicket"]
+          $_POST["message"]
         ));
       }
     }
