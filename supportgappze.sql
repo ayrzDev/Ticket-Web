@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 11 Eki 2022, 06:23:02
+-- Üretim Zamanı: 11 Eki 2022, 18:13:19
 -- Sunucu sürümü: 10.4.24-MariaDB
 -- PHP Sürümü: 8.1.6
 
@@ -134,7 +134,7 @@ CREATE TABLE `supportdata` (
   `ownerId` int(11) NOT NULL,
   `returningPersonId` int(11) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `date` date NOT NULL
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -142,9 +142,13 @@ CREATE TABLE `supportdata` (
 --
 
 INSERT INTO `supportdata` (`id`, `supportId`, `ownerId`, `returningPersonId`, `message`, `date`) VALUES
-(1, 15, 1, 1, 'mesaj', '0000-00-00'),
-(2, 15, 1, 1, 'mesaj2', '0000-00-00'),
-(3, 15, 1, 1, 'mesaj2', '0000-00-00');
+(1, 1, 2, 1, 'admin mesaj', '2022-10-11 12:22:56'),
+(2, 1, 2, 1, 'a', '2022-10-11 11:59:19'),
+(3, 1, 2, 0, 'aASASA', '2022-10-11 11:59:19'),
+(4, 1, 2, 1, 'aaxasxaxsaxs', '2022-10-11 12:03:59'),
+(5, 1, 2, 1, 'mesajjj', '2022-10-11 12:23:18'),
+(6, 1, 2, 1, 'ajaxxxx', '2022-10-11 12:23:21'),
+(7, 1, 2, 0, 'Anladım düzeltiyorum', '2022-10-11 12:07:39');
 
 -- --------------------------------------------------------
 
@@ -167,9 +171,7 @@ CREATE TABLE `supports` (
 --
 
 INSERT INTO `supports` (`id`, `title`, `message`, `department`, `status`, `ownerId`, `date`) VALUES
-(12, 'AhmetAhmetAhmetAhmetAhmetAhmetAhmetAhmetAhmetAhmetAhmetAhmet', '<p>a</p>\n', 1, 2, 1, '2022-10-10 18:13:15'),
-(15, 'Kapalı mesaj2', '<h1>Selam</h1>', 1, 0, 1, '2022-10-10 20:11:28'),
-(16, 'Nasıl Açıcağım', '<p>Merhaba nasıl bir sunucu kuracağım</p>\n', 1, 0, 2, '2022-10-09 20:46:37');
+(1, 'Ahmet', '<p>asasa</p>\n', 1, 0, 2, '2022-10-11 12:22:18');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -243,13 +245,13 @@ ALTER TABLE `roles`
 -- Tablo için AUTO_INCREMENT değeri `supportdata`
 --
 ALTER TABLE `supportdata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `supports`
 --
 ALTER TABLE `supports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
