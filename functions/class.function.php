@@ -178,15 +178,15 @@ class classFonksiyon {
             echo "<td>{$stats[$supports_veri["status"]]}</td>";
             echo "<td>";
             if($user->getPermission($_SESSION["userAccountID"]) == 1){
-              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'><i class='fa fa-eye'></i></button>";
+              echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
               echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$supports_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
             }else{
-              echo "<button class='btn btn-primary btn-specly mt-2 mr-2' type='button'><i class='fa fa-eye'></i></button>";
+              echo "<a class='btn btn-primary btn-specly mt-2 mr-2 endBtn' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
             }
             if($supports_veri["status"] == 2){
-              echo "<button class='btn btn-success btn-specly mt-2 mr-2' type='button'>Aç</button>";
+              echo "<button class='btn btn-success btn-specly mt-2 mr-2 openBtn' id='{$supports_veri["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
             }else{
-               echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'><i class='fa fa-times-circle text-light'></i></button>";
+              echo "<button class='btn btn-warning btn-specly mt-2 mr-2 endBtn' id='{$supports_veri["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
             }
 
             echo "</td>";
@@ -201,6 +201,69 @@ class classFonksiyon {
     }
     }
 
+    public function getSupportDetails(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $supports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+        $supports->execute(array(
+          $_GET["id"]
+        ));
+        $support_fetch = $supports->fetch();
+        if($user->getUserDepartment($_SESSION["userAccountID"]) == $support_fetch["department"] || $user->getPermission($_SESSION["userAccountID"]) == 1){
+         echo '<div class="user-box">
+            <img src="/resources/img/user.jpg"  class="user-image" alt="" style="width: 100px;">
+            <div class="data">';
+         echo "<p>{$support_fetch["date"]}</p>
+            </div>";
+         echo '<div class="title-user">';
+         echo "<h5>{$user->getName($support_fetch["ownerId"])}</h5>";
+         echo "<div class='descri-user'>{$support_fetch["message"]}</div>
+            </div>
+        </div>";
+        $supports_data = $db->prepare("SELECT * FROM supportdata WHERE supportId = ?");
+        $supports_data->execute(array(
+          $_GET["id"]
+        ));
+        foreach($supports_data as $supportsall){
+          echo '<div class="user-box">
+          <img src="/resources/img/user.jpg"  class="user-image" alt="" style="width: 100px;">
+          <div class="data">';
+        echo "<p>{$supportsall["date"]}</p>
+            </div>";
+        echo '<div class="title-user">';
+          if($user->getUserDepartmentName($supportsall["returningPersonId"])){
+          $rank = $user->getUserDepartmentName($supportsall["returningPersonId"]);
+        }
+        echo "<h5>{$user->getName($supportsall["ownerId"])} {$rank}</h5>";
+        echo "<div class='descri-user'>{$supportsall["message"]}</div>
+            </div>
+        </div>";
+        }
+        }else{
+          header("Location: index.php");
+          exit;
+        }
+        
+        echo "<div class='box-footer'>
+        <div class='input-group'>
+        <input class='form-control' name='ticket-message' placeholder='Mesaj yazınız...'>
+        <div class='input-group-btn'>
+            <button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
+            if($support_fetch["status"] != 2){
+            echo "<button class='btn btn-warning'><i class='fa fa-times-circle text-light'></i><span style='margin-left: 5px;'>Kapat</span></button>";
+            }else{
+              echo "<button class='btn btn-info'><i class='fa fa-check text-light'></i><span style='margin-left: 5px;'>Aç</span></button>";
+            }
+
+            echo "
+        </div>
+        </div>
+    </div>";
+      }
+    }
+
     public function removeSupport(){
       $db = $this->dbConnection();
       $user = new Accounts();
@@ -213,4 +276,106 @@ class classFonksiyon {
         echo "Silindi";
       }
     }
+
+    public function checkSupport($id){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $getSupport = $db->prepare("SELECT * FROM supports WHERE id = ?");
+        $getSupport->execute(array(
+          $id
+        ));
+        if($getSupport->rowCount() == 0){
+          header("Location: index.php");
+          exit;
+        }
+      }
+    }
+
+    public function endSupport(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $remove_prp = $db->prepare("UPDATE supports SET status = ? WHERE id = ?");
+        $remove_prp->execute(array(
+          2,
+          $_POST["key"]
+        ));
+        echo "Sonlandırıldı!";
+      }
+    }
+
+    public function openSupport(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $remove_prp = $db->prepare("UPDATE supports SET status = ? WHERE id = ?");
+        $remove_prp->execute(array(
+          0,
+          $_POST["key"]
+        ));
+        echo "Sonlandırıldı!";
+      }
+    }
+
+    public function getDepartments(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+      if($user->getPermission($_SESSION["userAccountID"]) != 0){
+          $departments = $db->prepare("SELECT * FROM departments");
+          $departments->execute();
+        if($departments->rowCount() != 0){
+          foreach ($departments as $departments_veri) {
+            echo "<tr>";  
+            echo "<td>{$departments_veri['id']}</td>";
+            echo "<td>{$departments_veri["name"]}</td>";
+          
+            echo "<td>";
+            if($user->getPermission($_SESSION["userAccountID"]) == 1){
+              echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$departments_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
+              echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$departments_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
+            }else{
+              echo "<a class='btn btn-primary btn-specly mt-2 mr-2 endBtn' href='support-view.php?id={$departments_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
+            }
+            echo "</td>";
+
+            echo "</tr>";
+
+          }
+        }
+      }else{
+
+      }
+    }
+    }
+
+    public function sendMessageTicket(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $id = $_POST["key"];
+        $replyer = $user->getName($_SESSION["userAccountID"]);
+        $support = $db->prepare("SELECT ownerId FROM supports WHERE id = ?");
+        $support->execute(array(
+          $id
+        ));
+        $support_fetch = $support->fetch();
+        $owner = $support_fetch["ownerId"];
+        $messageSend = $db->prepare("INSERT INTO supportdata SET supportId = ?,ownerId = ?, returningPersonId = ? , message = ?");
+        $messageSend->execute(array(
+          $id,
+          $owner,
+          $replyer,
+          $_POST["sendMessageTicket"]
+        ));
+      }
+    }
+
+    
 }

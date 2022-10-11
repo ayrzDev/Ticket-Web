@@ -4696,5 +4696,34 @@ fieldset[disabled] .btn-vk.active {
     padding: 10px;
 }
 
-.header-box{
+.box-area{
+    height: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.data{
+    padding: 0px 20px;
+}
+
+.title-user{
+    padding: 0px 20px;
+    font-size: 20px;
+}
+
+.title-user
+h5{
+    font-weight: bold;
+}
+.descri-user{
+    font-size: 14px;
+}
+
+.input-message{
+    margin-top: 30px;  
+    margin-bottom: 10px;
+    bottom: 0px;
+    border-radius: 15px;
 }

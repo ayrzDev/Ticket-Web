@@ -30,12 +30,28 @@ if(isset($_POST["supportadd"])){
   $class->supportAdd();
 }
 
-if(isset($_POST["removeData"])){
+if(isset($_POST["deleteSupport"])){
   $class->removeSupport();
+}
+
+if(isset($_POST["endSupport"])){
+  $class->endSupport();
+}
+
+if(isset($_POST["openSupport"])){
+  $class->openSupport();
+}
+
+if(isset($_POST["sendMessageTicket"])){
+  $class->sendMessageTicket();
 }
 
 if(isset($_POST["yenile"])){
   $class->getSupports($_POST["frame"]);
+}
+
+if(isset($_POST["supportyenile"])){
+  $class->getSupportDetails();
 }
 
 ?>
