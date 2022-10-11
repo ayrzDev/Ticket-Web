@@ -45,7 +45,8 @@ $class->checkSupport($_GET["id"]);
 
             <!-- Main content -->
             <section class="content">
-                <div     class="row">
+            <div id="callback"></div>
+                <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
                         <!-- general form elements -->

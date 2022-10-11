@@ -37,7 +37,7 @@ function sendMessageTicket(data,key,sendmessage) {
             "message": sendmessage,
             "sendMessageTicket": data
         },
-        success: function (sonuc) {
+        success: function (sonuc) {          
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
             supportyenile(data,key);
         }        

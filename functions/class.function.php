@@ -244,10 +244,15 @@ class classFonksiyon {
         echo "<p>{$supportsall["date"]}</p>
             </div>";
         echo '<div class="title-user">';
-          if($user->getUserDepartmentName($supportsall["returningPersonId"])){
+          if($user->getUserDepartment($supportsall["returningPersonId"])){
           $rank = $user->getUserDepartmentName($supportsall["returningPersonId"]);
         }
-        echo "<h5>{$user->getName($supportsall["ownerId"])} {$rank}</h5>";
+        if($supportsall["returningPersonId"] != 0){
+          $name = $user->getName($supportsall["returningPersonId"]);
+          echo "<h5>{$name} - ({$rank})</h5>";
+        }else{
+          echo "<h5>{$user->getName($supportsall["ownerId"])}</h5>";
+        }
         echo "<div class='descri-user'>{$supportsall["message"]}</div>
             </div>
         </div>";
@@ -266,10 +271,10 @@ class classFonksiyon {
         }else{
           echo "<button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
         }
-        if($supportsall["status"] == 2){
-          echo "<button class='btn btn-success btn-specly mt-2 mr-2 openBtn' id='{$_GET["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
+        if($support_fetch["status"] != 0){
+          echo "<button class='btn btn-success mt-2 mr-2 openBtn' id='{$_GET["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
         }else{
-          echo "<button class='btn btn-warning btn-specly mt-2 mr-2 endBtn' id='{$_GET["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
+          echo "<button class='btn btn-warning mt-2 mr-2 endBtn' id='{$_GET["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
         }
 
             echo "
@@ -374,6 +379,7 @@ class classFonksiyon {
       $user = new Accounts();
       $extra = new extraClass();
       if($db){
+        if($_POST["message"] != null){
         $id = $_POST["key"];
         $replyer = $_SESSION["userAccountID"];
         $support = $db->prepare("SELECT ownerId FROM supports WHERE id = ?");
@@ -389,7 +395,11 @@ class classFonksiyon {
           $replyer,
           $_POST["message"]
         ));
+        echo "Mesaj gönderildi";  
+      }else{
+        echo "Lütfen boşluğu doldurunuz";
       }
+    }
     }
 
     
