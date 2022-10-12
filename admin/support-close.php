@@ -21,7 +21,8 @@ if(!($user->getLoggedMod())){
   <link href="resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
   <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="resources/js/core.js"></script>
 </head>
 
 <body class="skin-red">
@@ -60,7 +61,7 @@ if(!($user->getLoggedMod())){
                         <th style="width: 100px;">İşlem</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="dataCenter" id="2">
                       <?php
                         $class->getSupports(2);
                       ?>

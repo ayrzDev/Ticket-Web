@@ -40,21 +40,15 @@ if(!($user->getLogged())){
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Konu</th>
-                    <th scope="col">Oluşturan</th>
                     <th scope="col">Tarih</th>
-                    <th scope="col">Durum</th>
+                    <th scope="col" style="width: 100px;">Durum</th>
                     <th scope="col">İşlem</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="ticket-bg my-1">
-                    <th scope="row">1</th>
-                    <td>Deneme</td>
-                    <td>Ahmet</td>
-                    <td>16 Ocak 2022</td>
-                    <td>Yanıtlandı</td>
-                    <td>Sil Değiştir</td>
-                </tr>
+                <?php
+                $class->getUserSupports();
+                ?>
             </tbody>
         </table>
     </div>

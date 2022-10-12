@@ -200,6 +200,35 @@ class classFonksiyon {
     }
     }
 
+    public function getUserSupports(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $getSupports = $db->prepare("SELECT * FROM supports WHERE ownerId = ?");
+        $getSupports->execute(array(
+          $_SESSION["userAccountID"]
+        ));
+        if($getSupports->rowCount() != 0){
+          $stats = array(
+            0 => "<p class='text-light bg-success text-center rounded-pill'>Açık</p>",
+            1 => "<p class='text-light bg-warning text-center rounded-pill'>Beklemede</p>",
+            2 => "<p class='text-light bg-danger text-center rounded-pill'>Kapalı</p>",
+            3 => "<p class='text-light bg-info text-center rounded-pill'>Yanıtlandı</p>"
+          );
+          foreach($getSupports as $getSupport){
+            echo '<tr class="ticket-bg my-1">';
+            echo "<th scope='row'>{$getSupport["id"]}</th>";
+            echo "<td>{$getSupport["title"]}</td>
+                    <td>{$getSupport["date"]}</td>
+                    <td>{$stats[$getSupport["status"]]}</td>
+                    <td>Sil Değiştir</td>
+                </tr>";
+          }
+        }
+      }
+    }
+
     public function getSupportDetails(){
       $db = $this->dbConnection();
       $user = new Accounts();

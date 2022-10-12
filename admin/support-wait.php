@@ -60,7 +60,7 @@ if(!($user->getLoggedMod())){
                         <th style="width: 100px;">İşlem</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="dataCenter" id="1">
                       <?php
                         $class->getSupports(1);
                       ?>

@@ -54,7 +54,9 @@ function supportyenile(data,key){
             "supportyenile": data,
         },
         success: function (msg) {
-            $(".box-area").html(msg);
+            setInterval(function () {
+                $(".box-area").html(msg);
+            }, 1);
         }
     });
 }
@@ -70,7 +72,7 @@ function openSupport(data,key) {
         },
         success: function (sonuc) {
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
-            // su(data);
+            yenile(data);
         }        
     });
 }
