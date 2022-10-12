@@ -269,6 +269,31 @@ class Accounts{
     }
   }
 
+  public function getSupportDepartment($id){
+    $class = new classFonksiyon();
+    $user = new Accounts();
+    $db = $class->dbConnection();
+    if($db){
+      $department = $db->prepare("SELECT department FROM supports WHERE id = ?");
+      $department->execute(array(
+        $id
+      ));
+      $departmentGet = $department->fetch();
+      
+      $accounts = $db->prepare("SELECT name FROM departments WHERE id = ?");
+      $accounts->execute(array(
+        $departmentGet["department"]
+      ));
+      $accounts_fetch = $accounts->fetch();
+      if($accounts->rowCount() != 0){
+        $departmen = $accounts_fetch["name"];
+          return $departmen; 
+      }else{
+        return "Tanımlanmamış";
+      }
+    }
+  }
+
 
 
   public function getDepartments(){

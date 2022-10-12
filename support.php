@@ -18,6 +18,9 @@ if(!($user->getLogged())){
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="resources/css/mainthemes.css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -28,34 +31,33 @@ if(!($user->getLogged())){
         </div>
     <div class="defaultheader">
         <div class="title">
-            <h1>Destek Taleplerim</h1>
+            <h1>Destek #<?=$_GET["id"]?></h1>
         </div>
         <div class="description">
-            <p>Burdan taleplerinize bakabilirsiniz..</p>
+            <p>Konu: <?php $class->getSupportTitle() ?> <br> Tarih: <?php $class->getSupportDate() ?></p>
         </div>
     </div>
-    <div class="mysupports container mt-5 mb-5">
-        <table class="table" border="0">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Konu</th>
-                    <th scope="col">Departman</th>
-                    <th scope="col">Tarih</th>
-                    <th scope="col" style="width: 100px;">Durum</th>
-                    <th scope="col">İşlem</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $class->getUserSupports();
-                ?>
-            </tbody>
-        </table>
+    <div class="supports-card container mt-5 mb-5" id="supports-card">
+        <div id="callback"></div>
+        <a href="mysupport.php" class="btn btn-outline-success" type="submit">Geri Dön</a>
+        <div class="messages-box">
+            <?php
+            $class->getUserSupportDetails();
+            ?>
+        </div>
+        <div class="box-footer mb-2 p-2">
+        <div class="input-group">
+        <input class="form-control" name="ticket-message" placeholder="Mesaj yazınız...">
+        <div class="input-group-btn">
+            <button class="btn btn-success sendMessage" id="<?= $_GET["id"] ?>" name="sendMessage"><i class="bi-plus"></i></button>
+        </div>
+        </div>
+    </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
-<script src="resources/js/core.js"></script>
 <script src="resources/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+
+<script src="resources/js/core.js"></script>
 
 </html>

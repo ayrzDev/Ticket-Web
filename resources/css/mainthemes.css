@@ -300,4 +300,63 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { /*tiklandiginda*/
   background-color: #7d7d7d;
+}
+
+.supports-card {
+  overflow-x: auto;
+  background-color: rgb(175, 175, 175);
+  border-radius: 15px;
+  color: #000;
+  padding: 20px;
+}
+
+.messages-box {
+  overflow: auto;
+}
+@media (max-width: 1300px) {
+  .messages-box {
+    max-height: 250px;
+  }
+}
+@media (max-width: 1500px) {
+  .messages-box {
+    max-height: 300px;
+  }
+}
+
+.message {
+  padding: 15px;
+  color: rgb(53, 53, 53);
+}
+.message h1,
+.message h2,
+.message h3,
+.message h4,
+.message h5,
+.message h6 {
+  font-size: 20px;
+}
+.message p {
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }/*# sourceMappingURL=mainthemes.css.map */

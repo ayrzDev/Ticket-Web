@@ -1,3 +1,71 @@
+$(document).on("click", '.deleteSupport', function(e) {
+    e.preventDefault();
+    var data = $("button[name=deleteSupport]").val();
+    var key = $(this).attr('id');
+    deleteSupport(data,key);
+});
+
+function deleteSupport(data,key) {
+    if (confirm(key+" Numaralı Datayı Silmeye Emin Misiniz ?")) {
+    $.ajax({
+        url: "/functions/functionBase.php",
+        type: "POST",
+        data: {
+            "key": key,
+            "deleteSupport": data
+        },
+        success: function (sonuc) {
+            $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
+            yenile(data);
+        }        
+    });
+}
+}
+
+$(document).on("click", '.sendMessage', function(e) {
+    e.preventDefault();
+    var data = $("button[name=sendMessage]").val();
+    var sendmessage = $("input[name=ticket-message]").val();
+    var key = $(this).attr('id');
+    sendMessage(data,key,sendmessage);
+});
+
+function sendMessage(data,key,sendmessage) {
+    if (confirm(key+" Mesajı göndermek istiyor musunuz ?")) {
+    $.ajax({
+        url: "/functions/functionBase.php",
+        type: "POST",
+        data: {
+            "key": key,
+            "message": sendmessage,
+            "sendMessage": data
+        },
+        success: function (sonuc) {         
+            if(sonuc == null || sonuc == ''){
+            }else{
+                $('#callback').html('<div class="alert alert-secondary w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
+            }
+            supportyenile(data,key);
+        }        
+    });
+}
+}
+
+function supportyenile(data,key){
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "id": key,
+            "usersupportyenile": data,
+        },
+        success: function (msg) {
+            $(".messages-box").html(msg);
+            // $('.messages-box').scrollTop($('.messages-box')[0].scrollHeight);
+        }
+    });
+}
+
 $(function() {
     $(".registerButton").click(function() {
         var name = $("input[name=registerFirstname]").val();
@@ -136,4 +204,15 @@ $(function() {
             }
         });
     });
+});
+
+$(document).ready(function() {
+    if ($("div").hasClass("messages-box")) {
+    $('.messages-box').scrollTop($('.messages-box')[0].scrollHeight);
+    var refreshTimer = setInterval(()=> {
+        var data = $("input[name=root]").val();
+        var key = $(".root").attr('id');
+        supportyenile(data,key)
+    },1000);
+}
 });

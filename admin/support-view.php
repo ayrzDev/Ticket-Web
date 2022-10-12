@@ -22,6 +22,7 @@ $class->checkSupport($_GET["id"]);
     <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
     <script src="resources/js/core.js"></script>
+
 </head>
 
 <body class="skin-blue">
@@ -34,7 +35,7 @@ $class->checkSupport($_GET["id"]);
             <section class="content-header">
                 <h1>
                     Ticket #<?= $_GET["id"]?>
-                    <small>İnceleniyor</small>
+                    <small>Departman: <?= $user->getSupportDepartment($_GET["id"]) ?></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="/admin/index.php"><i class="fa fa-dashboard"></i> Ana Sayfa</a></li>
@@ -45,27 +46,48 @@ $class->checkSupport($_GET["id"]);
 
             <!-- Main content -->
             <section class="content">
-            <div id="callback"></div>
+                <div id="callback"></div>
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
                         <!-- general form elements -->
-                        <div class="box-area" id="<?= $_GET["id"] ?>">
-                            <?php
+                        <div class="box-area">
+                            <div class="box-area-message" id="<?= $_GET["id"] ?>">
+                                <?php
                                 $class->getSupportDetails();
                             ?>
-                        </div><!-- /.box -->
+                            </div><!-- /.box -->
+                            <div class='box-footer'>
+                                <div class='input-group'>
+                                    <input class='form-control' id='ticket-message' name='ticket-message'
+                                        placeholder='Mesaj yazınız...'>
+                                    <div class='input-group-btn'>
+                                        <?php if(isset($_POST["id"])){
+                                        echo "<button class='btn btn-success sendMessageTicket' id='{$_POST["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
+                                        }else{
+                                        echo "<button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
+                                        }
+                                        
+                                        $class->getButtons();
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="settings">
+                                    <select class="form-control" name="departments" id="">
+                                        <?= $user->getDepartments(); ?>
+                                    </select>
+                                    <button class="btn align-center btn-primary updateDepartman" name="updateDepartman" type="button"
+                                        id="<?=$_GET["id"]?>">Güncelle</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div> <!-- /.row -->
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.0
-            </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All
-            rights reserved.
-        </footer>
+        <?php
+        include "pages/footer.php";
+        ?>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.3 -->

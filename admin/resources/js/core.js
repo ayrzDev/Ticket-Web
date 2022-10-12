@@ -5,6 +5,21 @@ $(document).on("click", '.deleteBtn', function(e) {
     deleteSupport(data,key);
 });
 
+$(document).on("click", '.updateDepartman', function(e) {
+    e.preventDefault();
+    var data = $("button[name=updateDepartman]").val();
+    var key = $(this).attr('id');
+    updateDepartman(data,key);
+});
+$(document).on("click", '.departmanadd', function(e) {
+    e.preventDefault();
+    var data = $("button[name=departmanadd]").val();
+    var key = $(this).attr('id');
+    addDepartman(data,key);
+});
+
+
+
 $(document).on("click", '.endBtn', function(e) {
     e.preventDefault();
     var data = $("button[name=endBtn]").val();
@@ -39,7 +54,9 @@ function sendMessageTicket(data,key,sendmessage) {
         },
         success: function (sonuc) {          
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
-            supportyenile(data,key);
+                supportyenile(data,key);
+                $("#ticket-message").html("");
+                sendmessage =='';
         }        
     });
 }
@@ -54,9 +71,39 @@ function supportyenile(data,key){
             "supportyenile": data,
         },
         success: function (msg) {
-            setInterval(function () {
-                $(".box-area").html(msg);
-            }, 1);
+            $(".box-area-message").html(msg);
+        }
+    });
+}
+
+function updateDepartman(data,key){
+    var departments = $("select[name=departments]").val();
+
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "id": key,
+            "departments": departments,
+            "updateDepartman": data,
+        },
+        success: function (msg) {
+            $("#callback").html(msg);
+        }
+    });
+}
+function addDepartman(data,key){
+    var name = $("input[name=departmanname]").val();
+
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "department": name,
+            "addDepartman": data,
+        },
+        success: function (msg) {
+            $("#callback").html(msg);
         }
     });
 }
@@ -127,3 +174,10 @@ function yenile(data){
         }
     });
 }
+$(document).ready(function() {
+    var refreshTimer = setInterval(()=> {
+    var data = $("input[name=root]").val();
+    var key = $(".root").attr('id');
+    supportyenile(data,key)
+    },5000);
+});

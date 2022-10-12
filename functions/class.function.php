@@ -57,7 +57,9 @@ class classFonksiyon {
                     echo '<ul class="treeview-menu">';
                     foreach ($getElements as $page_element) {
                         // echo $page_element["name"];
-                        echo "<li><a href='{$page_element["src"]}'><i class='fa fa-circle-o'></i> {$page_element["name"]}</a></li>";               
+                        if($page_element["permission"] == $permission){
+                        echo "<li><a href='{$page_element["src"]}'><i class='fa fa-circle-o'></i> {$page_element["name"]}</a></li>";         
+                        }
                     }
                     echo "</ul></li>";
                   }else{
@@ -168,7 +170,8 @@ class classFonksiyon {
               0 => "<p class='text-success bg-success text-center'>Açık</p>",
               1 => "<p class='text-warning bg-warning text-center'>Beklemede</p>",
               2 => "<p class='text-danger bg-danger text-center'>Kapalı</p>",
-              3 => "<p class='text-info bg-info text-center'>Yanıtlandı</p>"
+              3 => "<p class='text-info bg-info text-center'>Yanıtlandı</p>",
+              4 => "<p class='text-info bg-info text-center'>Cevaplandı</p>"
             );
             echo "<tr>";  
             echo "<td>{$supports_veri['id']}</td>";
@@ -181,14 +184,13 @@ class classFonksiyon {
               echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
               echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$supports_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
             }else{
-              echo "<a class='btn btn-primary btn-specly mt-2 mr-2 endBtn' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
+              echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
             }
             if($supports_veri["status"] == 2){
               echo "<button class='btn btn-success btn-specly mt-2 mr-2 openBtn' id='{$supports_veri["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
             }else{
               echo "<button class='btn btn-warning btn-specly mt-2 mr-2 endBtn' id='{$supports_veri["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
             }
-
             echo "</td>";
 
             echo "</tr>";
@@ -196,6 +198,8 @@ class classFonksiyon {
           }
         }
       }else{
+        header("Location: /");
+        exit;
       }
     }
     }
@@ -211,24 +215,92 @@ class classFonksiyon {
         ));
         if($getSupports->rowCount() != 0){
           $stats = array(
-            0 => "<p class='text-light bg-success text-center rounded-pill'>Açık</p>",
-            1 => "<p class='text-light bg-warning text-center rounded-pill'>Beklemede</p>",
-            2 => "<p class='text-light bg-danger text-center rounded-pill'>Kapalı</p>",
-            3 => "<p class='text-light bg-info text-center rounded-pill'>Yanıtlandı</p>"
+            0 => "<p class='px-4 text-light bg-success text-center rounded-pill'>Açık</p>",
+            1 => "<p class='px-4 text-light bg-warning text-center rounded-pill'>Beklemede</p>",
+            2 => "<p class='px-4 text-light bg-danger text-center rounded-pill'>Kapalı</p>",
+            3 => "<p class='px-4 text-light bg-info text-center rounded-pill'>Yanıtlandı</p>",
+            4 => "<p class='px-4 text-light bg-info text-center rounded-pill'>Cevaplandı</p>"
           );
           foreach($getSupports as $getSupport){
             echo '<tr class="ticket-bg my-1">';
             echo "<th scope='row'>{$getSupport["id"]}</th>";
             echo "<td>{$getSupport["title"]}</td>
+                    <td>{$user->getUserDepartmentName($getSupport["department"])}</td>
                     <td>{$getSupport["date"]}</td>
                     <td>{$stats[$getSupport["status"]]}</td>
-                    <td>Sil Değiştir</td>
-                </tr>";
+                    <td>";
+                  echo "<a href='support.php?id={$getSupport["id"]}' class='btn mx-1 btn-primary btn-specly mt-2 mr-2' id='{$getSupport["id"]}' name='delete' type='submit'><i class='bi-eye'></i></a>";
+                  echo "<button class='btn mx-1 btn-danger btn-specly mt-2 mr-2 deleteSupport' id='{$getSupport["id"]}' name='deleteSupport' type='submit'><i class='bi-trash'></i></button>";
+                echo "</td></tr>";
           }
         }
       }
     }
 
+    public function getUserSupportDetails(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+
+        if(isset($_POST["id"])){
+
+        $userSupports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+        $userSupports->execute(array(
+          $_POST["id"]
+        ));
+        $getAllMessageSupport = $db->prepare("SELECT * FROM supportdata where supportId = ?"); 
+        $getAllMessageSupport->execute(array(
+          $_POST["id"]
+        ));
+      }else{
+        $userSupports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+        $userSupports->execute(array(
+          $_GET["id"]
+        ));
+        $getAllMessageSupport = $db->prepare("SELECT * FROM supportdata where supportId = ?"); 
+        $getAllMessageSupport->execute(array(
+          $_GET["id"]
+        ));
+      }
+        $support_fetch = $userSupports->fetch();
+        echo "<div class='p-3 mx-5 text-end justify-content-start message-area'>
+        <div class='titles'>
+            <h5>{$user->getName($support_fetch["ownerId"])}</h5>
+        </div>";
+        echo "<div class='msg'>
+            <p>{$support_fetch["message"]}</p>
+        </div>
+      </div>";
+      foreach($getAllMessageSupport as $messages){
+          if($messages["returningPersonId"] == 0){
+          echo "<div class='p-3 mx-5 text-end message-area'>
+            <div class='titles'>
+                <h5>{$user->getName($messages["ownerId"])}</h5>
+            </div>";
+            echo "<div class='msg'>
+                <p>{$messages["message"]}</p>
+            </div>
+          </div>";
+        }else{
+          if($messages["ownerId"])
+          echo "<div class='p-3 mx-5 text-start justify-content-start message-area'>
+          <div class='titles'>
+              <h5>{$user->getName($messages["returningPersonId"])} - {$user->getUserDepartmentName($messages["returningPersonId"])}</h5>
+          </div>";
+          echo "<div class='msg'>
+              <p>{$messages["message"]}</p>
+          </div>
+        </div>";
+        }
+        }
+        if(isset($_POST["id"])){
+          echo "<input type='hidden' class='root' name='root' id='{$_POST["id"]}'>";
+        }else{
+        echo "<input type='hidden' class='root' name='root' id='{$_GET["id"]}'>";
+        }
+      }
+    }
     public function getSupportDetails(){
       $db = $this->dbConnection();
       $user = new Accounts();
@@ -267,19 +339,23 @@ class classFonksiyon {
         </div>";
      
         foreach($supports_data as $supportsall){
-          echo '<div class="user-box">
-          <img src="/resources/img/user.jpg"  class="user-image" alt="" style="width: 100px;">
+          if($supportsall["returningPersonId"] != 0){
+          echo '<div class="user-box align-end">
+          <img src="/resources/img/user.jpg"  class="user-image user-picture img-circle" alt="" style="width: 100px;">
           <div class="data">';
         echo "<p>{$supportsall["date"]}</p>
             </div>";
         echo '<div class="title-user">';
-          if($user->getUserDepartment($supportsall["returningPersonId"])){
           $rank = $user->getUserDepartmentName($supportsall["returningPersonId"]);
-        }
-        if($supportsall["returningPersonId"] != 0){
           $name = $user->getName($supportsall["returningPersonId"]);
           echo "<h5>{$name} - ({$rank})</h5>";
         }else{
+          echo '<div class="user-box text-end">
+          <img src="/resources/img/user.jpg"  class="user-image user-picture img-circle" alt="" style="width: 100px;">
+          <div class="data">';
+        echo "<p>{$supportsall["date"]}</p>
+            </div>";
+        echo '<div class="title-user">';
           echo "<h5>{$user->getName($supportsall["ownerId"])}</h5>";
         }
         echo "<div class='descri-user'>{$supportsall["message"]}</div>
@@ -287,29 +363,15 @@ class classFonksiyon {
         </div>";
         }
         }else{
-          header("Location: index.php");
-          exit;
+          // header("Location: index.php");
+          // exit;
         }
         
-        echo "<div class='box-footer'>
-        <div class='input-group'>
-        <input class='form-control' name='ticket-message' placeholder='Mesaj yazınız...'>
-        <div class='input-group-btn'>";
-        if(isset($_POST["id"])){
-          echo "<button class='btn btn-success sendMessageTicket' id='{$_POST["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
-        }else{
-          echo "<button class='btn btn-success sendMessageTicket' id='{$_GET["id"]}' name='sendMessageTicket'><i class='fa fa-plus'></i></button>";
-        }
-        if($support_fetch["status"] != 0){
-          echo "<button class='btn btn-success mt-2 mr-2 openBtn' id='{$_GET["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
-        }else{
-          echo "<button class='btn btn-warning mt-2 mr-2 endBtn' id='{$_GET["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
-        }
-
-            echo "
-        </div>
-        </div>
-    </div>";
+    if(isset($_POST["id"])){
+      echo "<input type='hidden' class='root' name='root' id='{$_POST["id"]}'>";
+    }else{
+    echo "<input type='hidden' class='root' name='root' id='{$_GET["id"]}'>";
+    }
       }
     }
 
@@ -424,6 +486,12 @@ class classFonksiyon {
           $replyer,
           $_POST["message"]
         ));
+
+        $support = $db->prepare("UPDATE supports SET status = ? WHERE id = ?");
+        $support->execute(array(
+          3,
+          $id
+        ));
         echo "Mesaj gönderildi";  
       }else{
         echo "Lütfen boşluğu doldurunuz";
@@ -431,5 +499,120 @@ class classFonksiyon {
     }
     }
 
+    public function sendMessage(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $id = $_POST["key"];
+        $replyer = $_SESSION["userAccountID"];
+        $support = $db->prepare("SELECT ownerId,status FROM supports WHERE id = ?");
+        $support->execute(array(
+          $id
+        ));
+        $support_fetch = $support->fetch();
+        if($support_fetch["status"] == 2){
+          echo "Bu talep sonlandırılmış mesaj iletemezsiniz!";
+        }else{
+        if($_POST["message"] != null){
+        $message = htmlentities($_POST["message"], ENT_QUOTES, "UTF-8");
+
+        $owner = $support_fetch["ownerId"];
+        $messageSend = $db->prepare("INSERT INTO supportdata SET supportId = ?,ownerId = ?, message = ?");
+        $messageSend->execute(array(
+          $id,
+          $owner,
+          $message
+        ));
+
+        $support = $db->prepare("UPDATE supports SET status = ? WHERE id = ?");
+        $support->execute(array(
+          1,
+          $id
+        ));      
+      }else{
+        echo "Lütfen boşluğu doldurunuz";
+      }
+    }
+    }
+    }
+
+    public function getSupportTitle(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $getTitle = $db->prepare("SELECT title FROM supports WHERE id = ?");
+        $getTitle->execute(array(
+          $_GET["id"]
+        ));
+        $getTitle_fetch = $getTitle->fetch();
+        echo $getTitle_fetch["title"];
+      }
+    }
+
+    public function getSupportDate(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $getTitle = $db->prepare("SELECT date FROM supports WHERE id = ?");
+        $getTitle->execute(array(
+          $_GET["id"]
+        ));
+        $getTitle_fetch = $getTitle->fetch();
+        echo $getTitle_fetch["date"];
+      }
+    }
+
+    public function getButtons(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      $supports = $db->prepare("SELECT * FROM supports WHERE id = ?");
+      $supports->execute(array(
+          $_GET["id"]
+      ));
+      $support_fetch = $supports->fetch();
+
+      if($support_fetch["status"] == 2){
+          echo "<button class='btn btn-success mt-2 mr-2 openBtn' id='{$_GET["id"]}' name='openBtn' type='button'><i class='fa fa-check text-light'></i></button>";
+      }else{
+          echo "<button class='btn btn-warning mt-2 mr-2 endBtn' id='{$_GET["id"]}' name='endBtn' type='button'><i class='fa fa-times-circle text-light'></i></button>";
+      }
+    }
+
+    public function updateDepartman(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        $getSupport = $db->prepare("UPDATE supports SET department = ? WHERE id = ?");
+        $getSupport->execute(array(
+          $_POST["departments"],
+          $_POST["id"]
+        ));
+        echo "Güncellendi";
+        echo "<meta http-equiv='refresh' content='3;URL=index.php'>";
+      }
+    }
     
+    public function addDepartment(){
+      $db = $this->dbConnection();
+      $user = new Accounts();
+      $extra = new extraClass();
+      if($db){
+        if($_POST["department"] != null){
+        $getSupport = $db->prepare("INSERT INTO departments SET name = ?");
+        $getSupport->execute(array(
+          $_POST["department"]
+        ));
+      
+        echo "Eklendi";
+        echo "<meta http-equiv='refresh' content='3;URL=index.php'>";
+      }else{
+        echo "Boş alan bırakmayınız";
+      }
+      }
+    }
 }

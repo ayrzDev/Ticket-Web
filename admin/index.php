@@ -13,6 +13,8 @@ if(!($user->getLoggedMod())){
 <head>
   <meta charset="UTF-8">
   <title>Gappze | Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -107,7 +109,6 @@ if(!($user->getLoggedMod())){
   <script src="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
   <script src="resources/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
   <script src="resources/js/pages/dashboard.js" type="text/javascript"></script>
-  <script src="resources/plugins/jQuery/jQuery-2.1.3.min.js"></script>
   <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   <script src="resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
   <script src="resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>

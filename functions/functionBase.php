@@ -54,4 +54,21 @@ if(isset($_POST["supportyenile"])){
   $class->getSupportDetails();
 }
 
+if(isset($_POST["usersupportyenile"])){
+  $class->getUserSupportDetails();
+}
+if(isset($_POST["sendMessage"])){
+  $class->sendMessage();
+}
+
+if(isset($_POST["updateDepartman"])){
+  $class->updateDepartman();
+}
+
+if(isset($_POST["addDepartman"])){
+  $class->addDepartment();
+}
+
+
+
 ?>
