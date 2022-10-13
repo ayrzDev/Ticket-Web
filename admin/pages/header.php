@@ -12,13 +12,16 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="/resources/img/user.jpg" class="user-image" alt="User Image" />
-                        <span class="hidden-xs"><?= $user->getName($_SESSION["userAccountID"]); ?></span>
+                        <?php
+                        $names = $user->getName($_SESSION["userAccountID"]);
+                        ?>
+                        <span class="hidden-xs"><?= $names[0]." ".$names[1] ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
                             <img src="/resources/img/user.jpg" class="img-circle" alt="User Image" />
                             <p>
-                            <?= $user->getName($_SESSION["userAccountID"]); ?>
+                            <?= $names[0]." ".$names[1] ?>
                             <small><?= $user->getPermissionName($_SESSION["userAccountID"]); ?></small>
                             </p>
                         </li>

@@ -54,16 +54,25 @@ class Accounts{
         if($accounts->rowCount() != 0){
           foreach ($accounts as $accounts_veri) {
               $role = $this->getPermissionName($accounts_veri["id"]);
-              $departmen_name = $this->getUserDepartmentName($_SESSION["userAccountID"]);
+              $departmenQuery = $db->prepare("SELECT * FROM departments WHERE id = ?");
+              $departmenQuery->execute(array(
+                $accounts_veri["department"]
+              ));
+              $departmenQuery_fetch = $departmenQuery->fetch();
+              if($accounts_veri["department"] == 0){
+                $departments = "";
+              }else{
+               $departments = $departmenQuery_fetch["name"];
+              }
               echo "<tr>";
               echo "<td>{$accounts_veri["id"]}</td>";
               echo "<td>{$accounts_veri["firstName"]}</td>";
               echo "<td>{$accounts_veri["lastName"]}</td>";
               echo "<td>{$accounts_veri["email"]}</td>";
               echo "<td>{$role}</td>";
-              echo "<td>{$departmen_name}</td><td>";
-              echo "<button class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</button>";
-              echo "<button class='btn btn-danger btn-specly mt-2 mr-2' type='button'>Sil</button>";
+              echo "<td>{$departments}</td><td>";
+              echo "<a href='account-edit.php?id={$accounts_veri["id"]}' class='btn btn-warning btn-specly mt-2 mr-2' type='button'>Düzenle</a>";
+              echo "<button class='btn btn-danger btn-specly mt-2 mr-2 usersil' id='{$accounts_veri["id"]}' name='usersil' type='button'>Sil</button>";
               echo "</td></tr>";
            }
        }
@@ -149,13 +158,18 @@ class Accounts{
     $class = new classFonksiyon();
     $user = new Accounts();
     $db = $class->dbConnection();
-    $accounts = $db->prepare("SELECT firstName,lastName FROM accounts WHERE id = ?");
+    $accounts = $db->prepare("SELECT firstName,lastName,email FROM accounts WHERE id = ?");
     $accounts->execute(array(
       $id
     ));
     $accounts_fetch = $accounts->fetch();
     if($accounts->rowCount() != 0){
-    return $accounts_fetch["firstName"]." ".$accounts_fetch["lastName"];
+      $names = array(
+        0 => $accounts_fetch["firstName"],
+        1 => $accounts_fetch["lastName"],
+        2 => $accounts_fetch["email"]
+      );
+    return $names;
     }
   }
 
@@ -240,8 +254,8 @@ class Accounts{
         $departmen_name_select->execute(array(
           $departmen
         ));
-        $departmen_name = $departmen_name_select->fetch();
         if($departmen_name_select->rowCount() != 0){
+          $departmen_name = $departmen_name_select->fetch();
           return $departmen_name["name"]; 
         }
       }else{
@@ -337,6 +351,45 @@ class Accounts{
       echo '<meta http-equiv="refresh" content="0;URL=index.php">';
     }else{
       echo '<meta http-equiv="refresh" content="0;URL=login.php">';
+    }
+  }
+
+  public function userDelete(){
+    $class = new classFonksiyon();
+    $db = $class->dbConnection();
+    if($db){
+     if(isset($_POST["id"])){
+       $id = $_POST["id"];
+       $removeUser = $db->prepare("DELETE FROM accounts WHERE id = ?");
+       $removeUser->execute(array(
+        $id
+       ));
+       echo "Silindi.";
+     }
+    }
+  }
+
+  public function updateAccount(){
+    $class = new classFonksiyon();
+    $db = $class->dbConnection();
+    if($db){
+     if(isset($_POST["id"])){
+      if( $_POST["name"] != null && $_POST["surname"] != null && $_POST["email"] != null && $_POST["permission"] != null && $_POST["department"] != null){
+       $id = $_POST["id"];
+       $removeUser = $db->prepare("UPDATE accounts SET firstName = ?,lastName = ?, email = ? , permission = ? ,department = ?  WHERE id = ?");
+       $removeUser->execute(array(
+        $_POST["name"],
+        $_POST["surname"],
+        $_POST["email"],
+        $_POST["permission"],
+        $_POST["department"],
+        $id
+       ));
+       echo "Düzenlendi.";
+     }else{
+      echo "Boş alan bırakma";
+     }
+    }
     }
   }
 }//AccountClass End

@@ -21,7 +21,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/functions/functionBase.php");
       include("pages/navbar.php");
     ?>
   </div>
-  <div class='code'>
+  <div class='code allhv'>
     <header class='content'>
       <h1 class='title'>Gappze Destek Sistemi</h1>
       <div class='text'>En güncel sistemlerle yapılan destek sistemimiz ile anında yanıt alın.</div>

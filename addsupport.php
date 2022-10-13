@@ -40,7 +40,11 @@ if(!($user->getLogged())){
         <div class="addsupport">
             <div class="process" id="process"></div>
             <div class="form-floating mb-2"">
-                <input type=" email" class="form-control" id="floatingInputValue" value="<?= $user->getName($_SESSION["userAccountID"]) ?>" disabled>
+            <?php
+            $name = $user->getName($_SESSION["userAccountID"]);
+            ?>
+
+                <input type=" email" class="form-control" id="floatingInputValue" value="<?= $name[0]." ".$name[1] ?>" disabled>
                 <label for="floatingInputValue">Adınız:</label>
             </div>
             <div class="form-floating mb-2"">

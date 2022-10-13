@@ -16,8 +16,22 @@ function deleteSupport(data,key) {
         },
         success: function (sonuc) {
             $('#callback').html('<div class="alert alert-success w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
-            yenile(data);
+            yenilesuppordata(data);
         }        
+    });
+}
+function yenilesuppordata(data,key){
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "id": key,
+            "supportDataYenile": data,
+        },
+        success: function (msg) {
+            $("#userSupports").html(msg);
+            // $('.messages-box').scrollTop($('.messages-box')[0].scrollHeight);
+        }
     });
 }
 }

@@ -140,6 +140,7 @@ class classFonksiyon {
         ));
       }
       echo "Destek talebi açıldı.";
+      echo "<meta http-equiv='refresh' content='1;URL=mysupport.php'>";
       }else{
       echo "Departman seçiniz";
       }
@@ -177,7 +178,7 @@ class classFonksiyon {
             echo "<td>{$supports_veri['id']}</td>";
             echo "<td>{$title}</td>";
             echo "<td>{$message}</td>";
-            echo "<td>{$extra->kisalt($name,15)}</td>";
+            echo "<td>{$extra->kisalt($name[0]." ".$name[1],15)}</td>";
             echo "<td>{$stats[$supports_veri["status"]]}</td>";
             echo "<td>";
             if($user->getPermission($_SESSION["userAccountID"]) == 1){
@@ -222,16 +223,23 @@ class classFonksiyon {
             4 => "<p class='px-4 text-light bg-info text-center rounded-pill'>Cevaplandı</p>"
           );
           foreach($getSupports as $getSupport){
+            $departmenQuery = $db->prepare("SELECT * FROM departments WHERE id = ?");
+            $departmenQuery->execute(array(
+              $getSupport["department"]
+            ));
+            $departmenQuery_fetch = $departmenQuery->fetch();
+            $departments = $departmenQuery_fetch["name"];
             echo '<tr class="ticket-bg my-1">';
             echo "<th scope='row'>{$getSupport["id"]}</th>";
-            echo "<td>{$getSupport["title"]}</td>
-                    <td>{$user->getUserDepartmentName($getSupport["department"])}</td>
-                    <td>{$getSupport["date"]}</td>
-                    <td>{$stats[$getSupport["status"]]}</td>
-                    <td>";
-                  echo "<a href='support.php?id={$getSupport["id"]}' class='btn mx-1 btn-primary btn-specly mt-2 mr-2' id='{$getSupport["id"]}' name='delete' type='submit'><i class='bi-eye'></i></a>";
-                  echo "<button class='btn mx-1 btn-danger btn-specly mt-2 mr-2 deleteSupport' id='{$getSupport["id"]}' name='deleteSupport' type='submit'><i class='bi-trash'></i></button>";
-                echo "</td></tr>";
+            echo "
+            <td>{$getSupport["title"]}</td>
+            <td>{$departments}</td>
+            <td>{$getSupport["date"]}</td>
+            <td>{$stats[$getSupport["status"]]}</td>
+            <td>";
+            echo "<a href='support.php?id={$getSupport["id"]}' class='btn mx-1 btn-primary btn-specly mt-2 mr-2' id='{$getSupport["id"]}' name='delete' type='submit'><i class='bi-eye'></i></a>";
+            echo "<button class='btn mx-1 btn-danger btn-specly mt-2 mr-2 deleteSupport' id='{$getSupport["id"]}' name='deleteSupport' type='submit'><i class='bi-trash'></i></button>";
+            echo "</td></tr>";
           }
         }
       }
@@ -253,7 +261,9 @@ class classFonksiyon {
         $getAllMessageSupport->execute(array(
           $_POST["id"]
         ));
-      }else{
+        $support_fetch = $userSupports->fetch();
+
+        }else{
         $userSupports = $db->prepare("SELECT * FROM supports WHERE id = ?");
         $userSupports->execute(array(
           $_GET["id"]
@@ -262,11 +272,15 @@ class classFonksiyon {
         $getAllMessageSupport->execute(array(
           $_GET["id"]
         ));
-      }
         $support_fetch = $userSupports->fetch();
+      }
+      
+        $username = $user->getName($support_fetch["ownerId"]);
         echo "<div class='p-3 mx-5 text-end justify-content-start message-area'>
+        <div class='my-2'> <img src='/resources/img/user.jpg' class='rounded-3  bg-light p-1' width='50px' > </div>
+
         <div class='titles'>
-            <h5>{$user->getName($support_fetch["ownerId"])}</h5>
+            <h5>{$username[0]} {$username[1]}</h5>
         </div>";
         echo "<div class='msg'>
             <p>{$support_fetch["message"]}</p>
@@ -275,8 +289,10 @@ class classFonksiyon {
       foreach($getAllMessageSupport as $messages){
           if($messages["returningPersonId"] == 0){
           echo "<div class='p-3 mx-5 text-end message-area'>
+          <div class='my-2'> <img src='/resources/img/user.jpg' class='rounded-3  bg-light p-1' width='50px' > </div>
+
             <div class='titles'>
-                <h5>{$user->getName($messages["ownerId"])}</h5>
+                <h5>{$username[0]} {$username[1]}</h5>
             </div>";
             echo "<div class='msg'>
                 <p>{$messages["message"]}</p>
@@ -284,15 +300,20 @@ class classFonksiyon {
           </div>";
         }else{
           if($messages["ownerId"])
+            $adminname = $user->getName($messages["returningPersonId"]);
+
           echo "<div class='p-3 mx-5 text-start justify-content-start message-area'>
+          <div class='my-2 p-2'> <img src='/resources/img/admin.png' class='rounded-3 bg-dark p-1' width='60px' > </div>
+
           <div class='titles'>
-              <h5>{$user->getName($messages["returningPersonId"])} - {$user->getUserDepartmentName($messages["returningPersonId"])}</h5>
+              <h5>{$adminname[0]} {$adminname[1]} - {$user->getUserDepartmentName($messages["returningPersonId"])}</h5>
           </div>";
           echo "<div class='msg'>
               <p>{$messages["message"]}</p>
           </div>
         </div>";
-        }
+        
+        
         }
         if(isset($_POST["id"])){
           echo "<input type='hidden' class='root' name='root' id='{$_POST["id"]}'>";
@@ -300,6 +321,7 @@ class classFonksiyon {
         echo "<input type='hidden' class='root' name='root' id='{$_GET["id"]}'>";
         }
       }
+    }
     }
     public function getSupportDetails(){
       $db = $this->dbConnection();
@@ -326,6 +348,7 @@ class classFonksiyon {
           ));
         }
         $support_fetch = $supports->fetch();
+        $username = $user->getName($support_fetch["ownerId"]);
         if($user->getUserDepartment($_SESSION["userAccountID"]) == $support_fetch["department"] || $user->getPermission($_SESSION["userAccountID"]) == 1){
          echo '<div class="user-box">
             <img src="/resources/img/user.jpg"  class="user-image" alt="" style="width: 100px;">
@@ -333,7 +356,7 @@ class classFonksiyon {
          echo "<p>{$support_fetch["date"]}</p>
             </div>";
          echo '<div class="title-user">';
-         echo "<h5>{$user->getName($support_fetch["ownerId"])}</h5>";
+         echo "<h5>{$username[0]} {$username[1]}</h5>";
          echo "<div class='descri-user'>{$support_fetch["message"]}</div>
             </div>
         </div>";
@@ -348,7 +371,7 @@ class classFonksiyon {
         echo '<div class="title-user">';
           $rank = $user->getUserDepartmentName($supportsall["returningPersonId"]);
           $name = $user->getName($supportsall["returningPersonId"]);
-          echo "<h5>{$name} - ({$rank})</h5>";
+          echo "<h5>{$name[0]} {$name[1]} - ({$rank})</h5>";
         }else{
           echo '<div class="user-box text-end">
           <img src="/resources/img/user.jpg"  class="user-image user-picture img-circle" alt="" style="width: 100px;">
@@ -356,7 +379,7 @@ class classFonksiyon {
         echo "<p>{$supportsall["date"]}</p>
             </div>";
         echo '<div class="title-user">';
-          echo "<h5>{$user->getName($supportsall["ownerId"])}</h5>";
+          echo "<h5>{$username[0]} {$username[1]}</h5>";
         }
         echo "<div class='descri-user'>{$supportsall["message"]}</div>
             </div>

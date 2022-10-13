@@ -69,6 +69,18 @@ if(isset($_POST["addDepartman"])){
   $class->addDepartment();
 }
 
+if(isset($_POST["userDelete"])){
+  $user->userDelete();
+}
+
+if(isset($_POST["supportDataYenile"])){
+  $class->getUserSupports();
+}
+
+if(isset($_POST["updateAccount"])){
+  $user->updateAccount();
+}
+
 
 
 ?>

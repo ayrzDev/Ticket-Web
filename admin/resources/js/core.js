@@ -5,6 +5,13 @@ $(document).on("click", '.deleteBtn', function(e) {
     deleteSupport(data,key);
 });
 
+$(document).on("click", '.updateUser', function(e) {
+    e.preventDefault();
+    var data = $("button[name=updateUser]").val();
+    var key = $(this).attr('id');
+    updateUser(data,key);
+});
+
 $(document).on("click", '.updateDepartman', function(e) {
     e.preventDefault();
     var data = $("button[name=updateDepartman]").val();
@@ -18,7 +25,12 @@ $(document).on("click", '.departmanadd', function(e) {
     addDepartman(data,key);
 });
 
-
+$(document).on("click", '.usersil', function(e) {
+    e.preventDefault();
+    var data = $("button[name=usersil]").val();
+    var key = $(this).attr('id');
+    userDelete(data,key);
+});
 
 $(document).on("click", '.endBtn', function(e) {
     e.preventDefault();
@@ -74,6 +86,48 @@ function supportyenile(data,key){
             $(".box-area-message").html(msg);
         }
     });
+}
+
+function updateUser(data,key){
+    var name = $("input[name=name]").val();
+    var surname = $("input[name=surname]").val();
+    var email = $("input[name=email]").val();
+    var permission = $( "#permission" ).val();
+    var department = $( "#department" ).val();
+
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "name": name,
+            "surname": surname,
+            "email": email,
+            "permission": permission,
+            "department": department,
+
+            "id": key,
+            "updateAccount": data,
+        },
+        success: function (msg) {
+            $("#callback").html(msg);
+        }
+    });
+}
+
+function userDelete(data,key){
+    if (confirm(key+" Kullanıcıyı silmeyi onaylıyor musunuz ?")) {
+    $.ajax({
+        type:'POST',
+        url: "/functions/functionBase.php",
+        data: {
+            "id": key,
+            "userDelete": data,
+        },
+        success: function (msg) {
+            $("#callback").html(msg);
+        }
+    });
+    }
 }
 
 function updateDepartman(data,key){

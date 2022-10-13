@@ -4,8 +4,11 @@
             <div class="pull-left image">
                 <img src="/resources/img/user.jpg" class="img-circle" alt="User Image" />
             </div>
+            <?php
+            $names = $user->getName($_SESSION["userAccountID"]);
+            ?>
             <div class="pull-left info">
-                <p><?= $user->getName($_SESSION["userAccountID"]); ?></p>
+                <p><?= $names[0]." ".$names[1] ?></p>
                 <a style="font-size: 15px"><?= $user->getPermissionName($_SESSION["userAccountID"]) ?></a>
             </div>
         </div>

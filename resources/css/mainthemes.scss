@@ -40,7 +40,7 @@ body {
 .code,
 html,
 body {
-  height: 100vh;
+  // height: 100vh;
   // overflow: hidden;
 }
 
@@ -243,6 +243,10 @@ body {
   overflow: hidden;
 }
 
+.allhv{
+  height: 100vh;
+}
+
 
 .icon{
   font-size: 30px;
@@ -300,7 +304,8 @@ body {
 
 .supports-card{
   overflow-x: auto;
-  background-color: rgb(175, 175, 175);
+  border: 10px;
+  background-color: #b7e0ff;
   border-radius: 15px;
   color: #000;
   padding: 20px;

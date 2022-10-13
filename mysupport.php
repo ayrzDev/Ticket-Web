@@ -46,7 +46,7 @@ if(!($user->getLogged())){
                     <th scope="col">İşlem</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="userSupports">
                 <?php
                 $class->getUserSupports();
                 ?>

@@ -21,6 +21,9 @@ if(!($user->getLoggedMod())){
   <link href="resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
   <link href="resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
   <link href="resources/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+
+  <script src="resources/js/core.js"></script>
 </head>
 
 <body class="skin-red">
@@ -44,6 +47,7 @@ if(!($user->getLoggedMod())){
       </section>
 
       <section class="content">
+        <div id="callback"></div>
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
