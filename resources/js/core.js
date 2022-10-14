@@ -58,8 +58,8 @@ function sendMessage(data,key,sendmessage) {
             if(sonuc == null || sonuc == ''){
             }else{
                 $('#callback').html('<div class="alert alert-secondary w-100  text-center" id="fadeAlert">'+ sonuc+'</div>');
+                supportyenile(data,key);
             }
-            supportyenile(data,key);
         }        
     });
 }
@@ -223,9 +223,9 @@ $(function() {
 $(document).ready(function() {
     if ($("div").hasClass("messages-box")) {
     $('.messages-box').scrollTop($('.messages-box')[0].scrollHeight);
+    var data = $("input[name=root]").val();
+    var key = $(".root").attr('id');
     var refreshTimer = setInterval(()=> {
-        var data = $("input[name=root]").val();
-        var key = $(".root").attr('id');
         supportyenile(data,key)
     },1000);
 }

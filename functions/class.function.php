@@ -181,7 +181,7 @@ class classFonksiyon {
             echo "<td>{$extra->kisalt($name[0]." ".$name[1],15)}</td>";
             echo "<td>{$stats[$supports_veri["status"]]}</td>";
             echo "<td>";
-            if($user->getPermission($_SESSION["userAccountID"]) == 1){
+            if($user->getPermission($_SESSION["userAccountID"]) >= 1){
               echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$supports_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
               echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$supports_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
             }else{
@@ -286,6 +286,12 @@ class classFonksiyon {
             <p>{$support_fetch["message"]}</p>
         </div>
       </div>";
+      if(isset($_POST["id"])){
+        echo "<input type='hidden' class='root' name='root' id='{$_POST["id"]}'>";
+      }else{
+        echo "<input type='hidden' class='root' name='root' id='{$_GET["id"]}'>";
+      }
+      if($getAllMessageSupport->rowCount() != 0){
       foreach($getAllMessageSupport as $messages){
           if($messages["returningPersonId"] == 0){
           echo "<div class='p-3 mx-5 text-end message-area'>
@@ -315,12 +321,10 @@ class classFonksiyon {
         
         
         }
-        if(isset($_POST["id"])){
-          echo "<input type='hidden' class='root' name='root' id='{$_POST["id"]}'>";
-        }else{
-        echo "<input type='hidden' class='root' name='root' id='{$_GET["id"]}'>";
-        }
+        
+
       }
+    }
     }
     }
     public function getSupportDetails(){
@@ -470,12 +474,11 @@ class classFonksiyon {
             echo "<td>{$departments_veri["name"]}</td>";
           
             echo "<td>";
-            if($user->getPermission($_SESSION["userAccountID"]) == 1){
-              echo "<a class='btn btn-primary btn-specly mt-2 mr-2' href='support-view.php?id={$departments_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
-              echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$departments_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
-            }else{
-              echo "<a class='btn btn-primary btn-specly mt-2 mr-2 endBtn' href='support-view.php?id={$departments_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
-            }
+            // if($user->getPermission($_SESSION["userAccountID"]) == 1){
+            //   echo "<button class='btn btn-danger btn-specly mt-2 mr-2 deleteBtn' id='{$departments_veri["id"]}' name='delete' type='submit'><i class='fa fa-trash'></i></button>";
+            // }else{
+            //   echo "<a class='btn btn-primary btn-specly mt-2 mr-2 deleteBtn' href='support-view.php?id={$departments_veri["id"]}'><i class='fa fa-eye text-light'></i></a>";
+            // }
             echo "</td>";
 
             echo "</tr>";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 12 Eki 2022, 19:05:37
+-- Üretim Zamanı: 14 Eki 2022, 06:25:43
 -- Sunucu sürümü: 10.4.24-MariaDB
 -- PHP Sürümü: 8.1.6
 
@@ -43,8 +43,9 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `firstName`, `lastName`, `email`, `password`, `permission`, `department`, `createdDate`) VALUES
-(1, 'Ahmet Mücahit', 'DOĞRU', 'dogrumucahit@hotmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 2, 2, '2022-10-12 13:43:25'),
-(2, 'Yusuf', 'Doğru', 'yusuf@tufcode.com', '827ccb0eea8a706c4c34a16891f84e7b', 0, 0, '2022-10-12 09:25:58');
+(1, 'Admin', 'DOĞRU', 'admin@gappze.com', '827ccb0eea8a706c4c34a16891f84e7b', 1, 1, '2022-10-13 09:49:30'),
+(2, 'Üye', 'DOĞRU', 'uye@gappze.com', '827ccb0eea8a706c4c34a16891f84e7b', 0, 0, '2022-10-13 10:00:39'),
+(7, 'destek', 'DOĞRU', 'destek@gappze.com', '827ccb0eea8a706c4c34a16891f84e7b', 1, 1, '2022-10-13 10:40:14');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,8 @@ CREATE TABLE `departments` (
 
 INSERT INTO `departments` (`id`, `name`) VALUES
 (1, 'Teknik Destek'),
-(2, 'Muhasabe');
+(2, 'Muhasabe'),
+(4, 'Muhasabe');
 
 -- --------------------------------------------------------
 
@@ -93,16 +95,16 @@ INSERT INTO `pages` (`id`, `name`, `src`, `permission`, `location`, `dropdown`, 
 (3, 'Yeni Destek Bileti Oluştur', 'addsupport.php', 0, 0, 0, 0, '', 1),
 (6, 'Gösterge Paneli', 'index.php', 0, 1, 0, 0, 'fa fa-dashboard', 0),
 (7, ' Destekler', '#', 0, 1, 0, 1, 'fa fa-ticket', 0),
-(8, 'Kullanıcılar', 'accounts.php', 1, 1, 0, 0, 'fa fa-user', 0),
-(9, 'Roller', 'roles.php', 1, 1, 0, 0, 'fa fa-tag', 0),
+(8, 'Kullanıcılar', 'accounts.php', 0, 1, 0, 0, 'fa fa-user', 0),
+(9, 'Roller', 'roles.php', 0, 1, 0, 0, 'fa fa-tag', 0),
 (10, 'Sayfa', '', 1, 1, 0, 1, 'fa fa-columns', 0),
 (11, 'Tümü', 'supports.php', 0, 1, 7, 0, '', 0),
 (12, 'Yanıt Bekleyenler', 'support-wait.php', 0, 1, 7, 0, '', 0),
-(15, 'Sayfa Ekle', '#', 1, 1, 10, 0, '', 0),
+(15, 'Sayfa Ekle', '#', 0, 1, 10, 0, '', 0),
 (16, 'Kapatılanlar', 'support-close.php', 0, 1, 7, 0, '', 0),
 (17, 'Yanıtlananlar', 'support-answered.php', 0, 1, 7, 0, '', 0),
-(18, 'Departmanlar', 'departments.php', 1, 1, 7, 0, '', 0),
-(19, 'Departman Ekle', 'departman-add.php', 1, 1, 7, 0, '', 0);
+(18, 'Departmanlar', 'departments.php', 0, 1, 7, 0, '', 0),
+(19, 'Departman Ekle', 'departman-add.php', 0, 1, 7, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -221,7 +223,23 @@ INSERT INTO `supportdata` (`id`, `supportId`, `ownerId`, `returningPersonId`, `m
 (76, 4, 2, 0, 'Selamlar', '2022-10-12 13:45:52'),
 (77, 4, 2, 1, 'Merhabalar size nasıl yardımcı olabiliriz', '2022-10-12 13:46:19'),
 (78, 4, 2, 0, 'Valla bana bi baklava lazımdı', '2022-10-12 13:46:32'),
-(79, 4, 2, 1, 'hemen gönderiyorum adres yollayın', '2022-10-12 14:08:40');
+(79, 4, 2, 1, 'hemen gönderiyorum adres yollayın', '2022-10-12 14:08:40'),
+(80, 2, 2, 0, 'abi nasılsın', '2022-10-12 19:07:39'),
+(81, 4, 2, 0, 'abi nasılsın', '2022-10-12 19:08:19'),
+(82, 4, 2, 1, 'iyiyim canım', '2022-10-12 19:08:30'),
+(83, 4, 2, 1, 'abi ♥', '2022-10-12 19:10:13'),
+(84, 4, 2, 0, 'evy', '2022-10-12 19:10:21'),
+(85, 5, 1, 1, 'Merhaba', '2022-10-13 04:33:50'),
+(86, 5, 1, 0, 'merhaba', '2022-10-13 04:33:57'),
+(87, 2, 2, 1, 'Allaha şükürler olsun hamd olsun gardaş iyiyim', '2022-10-13 05:04:06'),
+(88, 5, 1, 0, 'azxaxa', '2022-10-13 08:19:59'),
+(89, 5, 1, 0, 'xa', '2022-10-13 09:07:15'),
+(90, 6, 1, 0, 'aa', '2022-10-13 09:18:40'),
+(91, 6, 1, 1, 'sea', '2022-10-13 09:19:58'),
+(92, 13, 2, 0, 'deneme', '2022-10-13 10:22:59'),
+(93, 4, 2, 7, 'a.s', '2022-10-13 10:26:28'),
+(94, 13, 2, 0, 'deneme', '2022-10-12 10:21:11'),
+(96, 14, 2, 0, 'a', '2022-10-13 15:59:54');
 
 -- --------------------------------------------------------
 
@@ -244,8 +262,11 @@ CREATE TABLE `supports` (
 --
 
 INSERT INTO `supports` (`id`, `title`, `message`, `department`, `status`, `ownerId`, `date`) VALUES
-(2, 'Konu', '<p>asas</p>\n', 1, 1, 2, '2022-10-12 13:03:03'),
-(4, '111', '<p>11</p>\n', 2, 3, 2, '2022-10-12 14:08:40');
+(2, 'Yaşam', '<p>Nasıl yaşanır</p>\n', 1, 3, 2, '2022-10-13 09:25:55'),
+(5, 'Deneme', '<p>Deneme</p>\n', 2, 1, 2, '2022-10-13 09:26:53'),
+(13, 'bilgisayarım açılmıyor ', '<p><strong>mavi ekran hatası alıyorum</strong></p>\n', 2, 1, 2, '2022-10-13 10:25:53'),
+(14, 'Merhaba', '<p>Maaşım hala yatmadı</p>\n', 2, 1, 2, '2022-10-13 15:59:54'),
+(15, 'aaa', '<p>aa</p>\n', 1, 1, 1, '2022-10-13 15:59:15');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -295,13 +316,13 @@ ALTER TABLE `supports`
 -- Tablo için AUTO_INCREMENT değeri `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `pages`
@@ -319,13 +340,13 @@ ALTER TABLE `roles`
 -- Tablo için AUTO_INCREMENT değeri `supportdata`
 --
 ALTER TABLE `supportdata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `supports`
 --
 ALTER TABLE `supports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
